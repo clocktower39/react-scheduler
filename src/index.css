@@ -1,4 +1,10 @@
+html, body, #root, .App {
+  height: 100%;
+  margin: 0;
+}
+
 body {
+  color: white;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -7,7 +13,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.container {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.toolbar {
+  background-color: #37464f;
+  justify-content: center;
+}
+#footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #37464f;
 }
