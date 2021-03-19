@@ -13,20 +13,24 @@ export default class ProjectAssignments extends Component {
         this.handleShuffle = this.handleShuffle.bind(this);
     }
     handleShuffle = () => {
-        this.state.tasks.forEach(task => {
+        this.state.tasks.forEach((task, index) => {
             for(let i = 0; i < this.state.agents.length; i++){
                 if(this.state.agents[i].available === true){
                     this.setState((state, props)=>{
                         const updatedTasks = () => {
-                            
+                            state.tasks[index].assignedAgent = state.agents[i].firstName;
+                            return [...state.tasks]
                         }
                         const updatedAgents = () => {
-                            
+                            state.agents[i].available = false;
+                            state.agents[i].assignedJobs.push(task);
+                            return [...state.agents]
                         }
-
+                        console.log(updatedTasks());
+                        console.log(updatedAgents());
                         return {
-                            tasks: updatedTasks,
-                            agents: updatedAgents
+                            tasks: updatedTasks(),
+                            agents: updatedAgents()
                         }
                     })
                 }
