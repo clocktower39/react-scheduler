@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Paper, Grid, withStyles } from '@material-ui/core';
-
+import { Button, Paper, Grid, withStyles } from '@material-ui/core';
+import Icon from 'awesome-react-icons';
 
 const styles = (theme) => ({
     root: {
@@ -14,14 +14,41 @@ const styles = (theme) => ({
       width: '100%',
       color: 'white'
     },
+    iconContainer : {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    unassignedAgent: {
+        color: '#c51162'
+    }
   });
 
 class Project extends Component {
+    constructor(props){
+        super(props);
+
+        this.isAgentAssigned = this.isAgentAssigned.bind(this);
+    }
+    isAgentAssigned = (classes) => this.props.agent === "Unassigned" ? classes.unassignedAgent : null;
+
     render() {
         const { classes } = this.props;
         return (
         <Grid className={classes.root} container item xs={12} sm={4} md={3} lg={3}>
-            <Paper className={classes.paper} >{this.props.projectName}<br/>{this.props.agent}</Paper>
+            <Paper className={classes.paper} >
+                <p>
+                    {this.props.projectName}
+                </p>
+                <p className={this.isAgentAssigned(classes)}>
+                    {this.props.agent}
+                </p>
+                <div className={classes.iconContainer}>
+                    <Button><Icon name="arrow-left" /></Button>
+                    <Button><Icon name="trash" /></Button>
+                    <Button><Icon name="arrow-right" /></Button>
+                </div>
+            </Paper>
         </Grid>
         )
     }

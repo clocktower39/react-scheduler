@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Toolbar, Typography, AppBar, IconButton, Button } from '@material-ui/core';
+import ProjectAssignments from './ProjectAssignments';
 
 export default class Footer extends Component {
-    
+
     render() {
         return (
             <AppBar position="relative" id="footer">
