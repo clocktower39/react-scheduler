@@ -9,7 +9,6 @@ const styles = (theme) => ({
     paper: {
       padding: theme.spacing(2),
       textAlign: "center",
-      color: theme.palette.text.secondary,
       backgroundColor: '#3f51b5',
       alignItems: "stretch",
       width: '100%',
