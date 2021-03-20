@@ -21,7 +21,7 @@ class Project extends Component {
         const { classes } = this.props;
         return (
         <Grid className={classes.root} container item xs={12} sm={4} md={3} lg={3}>
-            <Paper item className={classes.paper} >{this.props.projectName}<br/>{this.props.agent}</Paper>
+            <Paper className={classes.paper} >{this.props.projectName}<br/>{this.props.agent}</Paper>
         </Grid>
         )
     }

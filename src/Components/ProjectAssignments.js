@@ -17,14 +17,16 @@ export default class ProjectAssignments extends Component {
     }
     resetState = () => {
         this.setState((state) => {
-            const newTasks = state.tasks.map(task =>{
+            const newTasks = state.tasks.map(task => {
                 task.assignedAgent = "Unassigned";
                 task.assigned = false;
+                return { ...task }
             });
             const newAgents = state.agents.map(agent =>{
                 agent.load = 0;
                 agent.available = true;
                 agent.assignedJobs = [];
+                return { ...agent }
             });
             
             return {
@@ -83,7 +85,7 @@ export default class ProjectAssignments extends Component {
     render() {
         return (
             <Container className="container" maxWidth="lg" spacing={3}>
-                <Box display="block" overflow="" style={{height: '100%', padding: 0, margin: 0}}>
+                <Box display="block" style={{height: '100%', padding: 0, margin: 0}}>
                     <Button variant="contained" color="secondary" onClick={this.resetState}>Reset</Button>
                     
                     <Button variant="contained" color="secondary" onClick={this.handleShuffle}>Shuffle</Button>
