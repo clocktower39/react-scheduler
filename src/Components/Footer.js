@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Toolbar, Typography, AppBar, IconButton, Button } from '@material-ui/core';
-import ProjectAssignments from './ProjectAssignments';
 
 export default class Footer extends Component {
 
@@ -14,7 +13,8 @@ export default class Footer extends Component {
                 >
                 </IconButton>
                 <Typography variant="caption" color="inherit">
-                    <Button variant="contained" color="secondary" onClick={null} >Shuffle</Button>
+                    <Button variant="contained" color="secondary" onClick={/*this.resetState*/this.props.resetState}>Reset</Button>
+                    <Button variant="contained" color="secondary" onClick={/*this.handleShuffle*/this.props.shuffleSchedule}>Shuffle</Button>
                 </Typography>
                 </Toolbar>
             </AppBar>
