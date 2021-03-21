@@ -35,7 +35,7 @@ class Project extends Component {
     render() {
         const { classes } = this.props;
         return (
-        <Grid className={classes.root} container item xs={12} sm={4} md={3} lg={3}>
+        <Grid style={{order: this.props.order}} className={classes.root} container item xs={12} sm={4} md={3} lg={3}>
             <Paper className={classes.paper} >
                 <p>
                     {this.props.projectName}
@@ -44,9 +44,9 @@ class Project extends Component {
                     {this.props.agent}
                 </p>
                 <div className={classes.iconContainer}>
-                    <Button><Icon name="arrow-left" /></Button>
+                    <Button onClick={this.props.higherPriority}><Icon name="arrow-left" /></Button>
                     <Button><Icon name="trash" /></Button>
-                    <Button><Icon name="arrow-right" /></Button>
+                    <Button onClick={this.props.lowerPriority}><Icon name="arrow-right" /></Button>
                 </div>
             </Paper>
         </Grid>

@@ -1,41 +1,27 @@
 import React, { Component } from 'react';
-import { Toolbar } from '@material-ui/core';
+import Navbar from './Components/Navbar';
 import ProjectAssignments from './Components/ProjectAssignments';
 import Footer from './Components/Footer';
 import { agents, tasks } from './store';
 import './App.css';
 
+const INITIAL_STATE = {
+  tasks: [...tasks],
+  agents: [...agents]
+};
+
 class App extends Component {
   constructor(props){
       super(props);
-      this.state = {
-          tasks: [...tasks],
-          agents: [...agents]
-      };
+      this.state = JSON.parse(JSON.stringify(INITIAL_STATE));
 
       this.shuffle = this.shuffle.bind(this);
-      this.handleShuffle = this.handleShuffle.bind(this);
       this.resetState = this.resetState.bind(this);
+      this.handleShuffle = this.handleShuffle.bind(this);
+      this.handlePriorityChange = this.handlePriorityChange.bind(this);
   }
   resetState = () => {
-      this.setState((state) => {
-          const newTasks = state.tasks.map(task => {
-              task.assignedAgent = "Unassigned";
-              task.assigned = false;
-              return { ...task }
-          });
-          const newAgents = state.agents.map(agent =>{
-              agent.load = 0;
-              agent.available = true;
-              agent.assignedJobs = [];
-              return { ...agent }
-          });
-          
-          return {
-              newTasks,
-              newAgents
-          }
-      })
+      this.setState(JSON.parse(JSON.stringify(INITIAL_STATE)));
   }
   handleShuffle = () => {
       this.resetState();
@@ -82,14 +68,56 @@ class App extends Component {
       }
     
       return array;
+  }
+  handlePriorityChange = (currentPriority, direction) => {
+    const maxIndex = this.state.tasks.length;
+    if(direction === 'up'){
+      
+      this.setState((state) => {
+        let newTasks = [...state.tasks];
+        let newAgents = [...state.agents];
+        
+        for(let taskIndex = 0; taskIndex < maxIndex; taskIndex++){
+          if(taskIndex+1 === currentPriority && currentPriority < maxIndex){
+              newTasks[taskIndex+1].priority = currentPriority;
+              newTasks[taskIndex].priority = currentPriority+1;
+              break;
+          }
+        }
+        newTasks = newTasks.sort((a,b)=>a.priority>b.priority)
+        return {
+          tasks: newTasks,
+          agents: newAgents
+        }
+      })
     }
+    else{
+      this.setState((state) => {
+        let newTasks = [...state.tasks];
+        let newAgents = [...state.agents];
+        
+        for(let taskIndex = 0; taskIndex < maxIndex; taskIndex++){
+          if(taskIndex+1 === currentPriority && currentPriority > 0){
+              newTasks[taskIndex].priority = currentPriority-1;
+              break;
+          }
+        }
+        newTasks = newTasks.sort((a,b)=>a.priority>b.priority)
+        return {
+          tasks: newTasks,
+          agents: newAgents
+        }
+      })
+    }
+    console.log(this.state)
+  }
     
   render(){
     return (
       <div className="App">
-        <Toolbar className="toolbar">Schedule Generator</Toolbar>
+        <Navbar />
 
-        <ProjectAssignments agents={this.state.agents} tasks={this.state.tasks} />
+        <ProjectAssignments agents={this.state.agents} tasks={this.state.tasks} changePriority={this.handlePriorityChange} />
 
         <Footer resetState={this.resetState} shuffleSchedule={this.handleShuffle}/>
         

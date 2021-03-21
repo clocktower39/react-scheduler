@@ -72,6 +72,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 1,
     },
     {
         task: "Bosentan PAEs",
@@ -79,6 +80,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Bosentan",
+        priority: 2,
     },
     {
         task: "CPMG PAEs Backup",
@@ -86,6 +88,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 3,
     },
     {
         task: "Notifications",
@@ -93,6 +96,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 4,
     },
     {
         task: "Project 1",
@@ -100,6 +104,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 5,
     },
     {
         task: "Project 2",
@@ -107,6 +112,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 6,
     },
     {
         task: "Project 3",
@@ -114,6 +120,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 7,
     },
     {
         task: "Project 4",
@@ -121,6 +128,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Clozapine",
+        priority: 8,
     },
     {
         task: "Aveed",
@@ -128,6 +136,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Aveed",
+        priority: 9,
     },
     {
         task: "Alosetron",
@@ -135,6 +144,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Alosetron",
+        priority: 10,
     },
     {
         task: "Bosentan",
@@ -142,6 +152,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Bosentan",
+        priority: 11,
     },
     {
         task: "Nulojix",
@@ -149,6 +160,7 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Nulojix",
+        priority: 12,
     },
     {
         task: "Xiaflex",
@@ -156,5 +168,6 @@ export const tasks = [
         assigned: false,
         assignedAgent: "Unassigned",
         associatedProgram: "Xiaflex",
+        priority: 13,
     },
 ];
