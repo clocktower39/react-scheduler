@@ -17,14 +17,33 @@ class App extends Component {
 
       this.shuffle = this.shuffle.bind(this);
       this.resetState = this.resetState.bind(this);
+      this.resetAssignments = this.resetAssignments.bind(this);
       this.handleShuffle = this.handleShuffle.bind(this);
       this.handlePriorityChange = this.handlePriorityChange.bind(this);
   }
   resetState = () => {
       this.setState(JSON.parse(JSON.stringify(INITIAL_STATE)));
   }
+
+  resetAssignments = () => {
+    this.setState((state) => {
+      const newTasks = state.tasks.forEach(task => {
+        task.assigned = false;
+        task.assignedAgent = "Unassigned";
+      });
+      const newAgents = state.agents.forEach(agent => {
+        agent.load = 0;
+        agent.assignedJobs = [];
+      });
+
+      return {
+          newTasks,
+          newAgents
+      }
+  });
+  }
   handleShuffle = () => {
-      this.resetState();
+      this.resetAssignments();
       this.setState((state) => {
           let newTasks = [...state.tasks];
           let newAgents = [...state.agents];
