@@ -13,7 +13,7 @@ export default class ProjectAssignments extends Component {
                     spacing={3}
                     style={{ flexGrow: 1, padding: "15px" }}
                 >
-                    {this.props.tasks.map(task => <Project order={task.priority} lowerPriority={()=>{this.props.changePriority(task.priority, 'up')}} higherPriority={()=>{this.props.changePriority(task.priority, 'down')}} key={task.task} projectName={task.task} agent={task.assignedAgent} />)}
+                    {this.props.tasks.map(task => <Project order={task.priority} removeTask={()=>{this.props.removeTask(task.priority)}} lowerPriority={()=>{this.props.changePriority(task.priority, 'up')}} higherPriority={()=>{this.props.changePriority(task.priority, 'down')}} key={task.task} projectName={task.task} agent={task.assignedAgent} />)}
                 </Grid>
                 </Box>
             </Container>

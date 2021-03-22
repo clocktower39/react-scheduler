@@ -45,7 +45,7 @@ class Project extends Component {
                 </p>
                 <div className={classes.iconContainer}>
                     <Button onClick={this.props.higherPriority}><Icon name="arrow-left" /></Button>
-                    <Button><Icon name="trash" /></Button>
+                    <Button onClick={this.props.removeTask}><Icon name="trash" /></Button>
                     <Button onClick={this.props.lowerPriority}><Icon name="arrow-right" /></Button>
                 </div>
             </Paper>
