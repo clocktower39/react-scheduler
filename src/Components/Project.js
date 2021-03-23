@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Paper, Grid, withStyles } from '@material-ui/core';
+import { Button, Input, Paper, Grid, TextField, Typography, withStyles } from '@material-ui/core';
 import Icon from 'awesome-react-icons';
 
 const styles = (theme) => ({
@@ -19,11 +19,14 @@ const styles = (theme) => ({
         flexDirection: 'row',
         justifyContent: 'space-around'
     },
-    hideIconContainer: {
+    hide: {
         display: 'none',
     },
     unassignedAgent: {
         color: '#c51162'
+    },
+    input: {
+        textAlign: 'center'
     }
   });
 
@@ -40,13 +43,11 @@ class Project extends Component {
         return (
         <Grid style={{order: this.props.order}} className={classes.root} container item xs={12} sm={4} md={3} lg={3}>
             <Paper className={classes.paper} >
-                <p>
-                    {this.props.projectName}
-                </p>
+                {(!this.props.editMode)?(<Typography>{this.props.projectName}</Typography>):(<><TextField className={classes.input} placeholder='Task Name' value={this.props.projectName} /><Input placeholder='Load Score' /></>)}
                 <p className={this.isAgentAssigned(classes)}>
                     {this.props.agent}
                 </p>
-                <div className={(this.props.editMode)?classes.iconContainer:classes.hideIconContainer}>
+                <div className={(this.props.editMode)?classes.iconContainer:classes.hide}>
                     <Button onClick={this.props.higherPriority}><Icon name="arrow-left" /></Button>
                     <Button onClick={this.props.removeTask}><Icon name="trash" /></Button>
                     <Button onClick={this.props.lowerPriority}><Icon name="arrow-right" /></Button>
