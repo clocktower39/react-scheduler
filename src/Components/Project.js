@@ -41,12 +41,12 @@ class Project extends Component {
     render() {
         const { classes } = this.props;
         return (
-        <Grid style={{order: this.props.order}} className={classes.root} container item xs={12} sm={4} md={3} lg={3}>
+        <Grid style={{order: this.props.order}} className={classes.root} container item xs={12} sm={6} md={4} lg={3}>
             <Paper className={classes.paper} >
-                {(!this.props.editMode)?(<Typography>{this.props.projectName}</Typography>):(<><TextField className={classes.input} placeholder='Task Name' value={this.props.projectName} /><Input placeholder='Load Score' /></>)}
-                <p className={this.isAgentAssigned(classes)}>
+                {(!this.props.editMode)?(<Typography variant={'body1'}>{this.props.projectName}</Typography>):(<><TextField className={classes.input} placeholder='Task Name' value={this.props.projectName} /><br /><Input placeholder='Load Score' /></>)}
+                <Typography variant={'body1'} className={this.isAgentAssigned(classes)}>
                     {this.props.agent}
-                </p>
+                </Typography>
                 <div className={(this.props.editMode)?classes.iconContainer:classes.hide}>
                     <Button onClick={this.props.higherPriority}><Icon name="arrow-left" /></Button>
                     <Button onClick={this.props.removeTask}><Icon name="trash" /></Button>

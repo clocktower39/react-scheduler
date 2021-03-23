@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Toolbar } from '@material-ui/core';
+import { Toolbar, Typography } from '@material-ui/core';
 
 export default class Navbar extends Component {
     render() {
         return (
-            <Toolbar className="toolbar">Schedule Generator</Toolbar>
+            <Toolbar className="toolbar">
+                <Typography variant={'h4'}>
+                    Schedule Generator
+                </Typography>
+            </Toolbar>
         )
     }
 }
