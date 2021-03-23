@@ -7,6 +7,7 @@ import {
   Button,
   withStyles,
 } from "@material-ui/core";
+import { Shuffle, Edit, Cached as Reset } from '@material-ui/icons';
 
 const styles = (theme) => ({
   root: {
@@ -34,7 +35,7 @@ class Footer extends Component {
               color="secondary"
               onClick={this.props.resetState}
             >
-              Reset
+              <Reset />
             </Button>
             <Button
               className={classes.btnOptions}
@@ -42,7 +43,7 @@ class Footer extends Component {
               color="secondary"
               onClick={this.props.shuffleSchedule}
             >
-              Shuffle
+              <Shuffle />
             </Button>
             <Button
               className={classes.btnOptions}
@@ -50,7 +51,7 @@ class Footer extends Component {
               color="secondary"
               onClick={this.props.toggleEditMode}
             >
-              Edit mode
+              <Edit />
             </Button>
           </Typography>
         </Toolbar>
