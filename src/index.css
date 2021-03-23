@@ -30,13 +30,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.toolbar {
-  background-color: #37464f;
-  justify-content: center;
-}
-#footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: #37464f;
-}

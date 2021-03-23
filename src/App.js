@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import Navbar from './Components/Navbar';
-import ProjectAssignments from './Components/ProjectAssignments';
-import Footer from './Components/Footer';
-import { agents, tasks } from './store';
-import './App.css';
+import React, { Component } from "react";
+import Navbar from "./Components/Navbar";
+import AgentDrawer from "./Components/AgentDrawer";
+import ProjectAssignments from "./Components/ProjectAssignments";
+import Footer from "./Components/Footer";
+import { agents, tasks } from "./store";
+import "./App.css";
 
 const INITIAL_STATE = {
   tasks: [...tasks],
   agents: [...agents],
-  editMode: false
+  editMode: false,
+  left: false,
 };
 
 class App extends Component {
@@ -23,6 +25,7 @@ class App extends Component {
     this.handlePriorityChange = this.handlePriorityChange.bind(this);
     this.handleRemoveTask = this.handleRemoveTask.bind(this);
     this.handleEditToggle = this.handleEditToggle.bind(this);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
   }
   resetState = () => {
     this.setState(JSON.parse(JSON.stringify(INITIAL_STATE)));
@@ -42,6 +45,7 @@ class App extends Component {
         newTasks,
         newAgents,
         editMode: state.editMode,
+        left: state.left,
       };
     });
   };
@@ -81,6 +85,7 @@ class App extends Component {
         newTasks,
         newAgents,
         editMode: state.editMode,
+        left: state.left,
       };
     });
   };
@@ -131,6 +136,7 @@ class App extends Component {
         tasks: newTasks,
         agents: newAgents,
         editMode: state.editMode,
+        left: state.left,
       };
     });
   };
@@ -151,6 +157,7 @@ class App extends Component {
         tasks: newTasks,
         agents: newAgents,
         editMode: state.editMode,
+        left: state.left,
       };
     });
 
@@ -158,7 +165,7 @@ class App extends Component {
       // modify each task priority to realign due to removed task
       const newTasks = state.tasks.map((task, index) => {
         task.priority = index + 1;
-        return task
+        return task;
       });
 
       // dont touch agents, no need
@@ -167,12 +174,14 @@ class App extends Component {
       return {
         tasks: newTasks,
         agents: newAgents,
+        editMode: state.editMode,
+        left: state.left,
       };
     });
 
-    this.state.tasks.forEach(task=> {
-      console.log(`${task.task} : ${task.priority}`)
-    })
+    this.state.tasks.forEach((task) => {
+      console.log(`${task.task} : ${task.priority}`);
+    });
   };
   handleEditToggle = () => {
     this.setState((state) => {
@@ -180,21 +189,44 @@ class App extends Component {
         tasks: state.tasks,
         agents: state.agents,
         editMode: !state.editMode,
-      }
-    })
-  }
+        left: state.left,
+      };
+    });
+  };
+  toggleDrawer = () => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    this.setState((state) => {
+      return {
+        ...state,
+        left: !state.left,
+      };
+    });
+  };
   render() {
     return (
       <div className="App">
-        <Navbar />
+        <Navbar handleDrawerToggle={this.toggleDrawer} />
 
-        <ProjectAssignments
-          agents={this.state.agents}
-          tasks={this.state.tasks}
-          changePriority={this.handlePriorityChange}
-          removeTask={this.handleRemoveTask}
-          editMode={this.state.editMode}
-        />
+        <div className="container">
+          <AgentDrawer
+            agents={this.state.agents}
+            toggleDrawer={this.toggleDrawer}
+            isLeftOpen={this.state.left}
+          />
+          <ProjectAssignments
+            agents={this.state.agents}
+            tasks={this.state.tasks}
+            changePriority={this.handlePriorityChange}
+            removeTask={this.handleRemoveTask}
+            editMode={this.state.editMode}
+          />
+        </div>
 
         <Footer
           resetState={this.resetState}
