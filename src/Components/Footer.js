@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
-import { Toolbar, Typography, AppBar, IconButton, Button } from '@material-ui/core';
+import { Toolbar, Typography, AppBar, IconButton, Button, withStyles } from '@material-ui/core';
 
-export default class Footer extends Component {
+const styles = (theme) => ({
+    root: {
+    },
+    btnOptions: {
+        margin: '0 5px'
+    }
+  });
+
+class Footer extends Component {
 
     render() {
+        const { classes } = this.props;
         return (
-            <AppBar position="relative" id="footer">
+            <AppBar className={classes.root} position="relative" id="footer">
                 <Toolbar>
                 <IconButton
                     color="inherit"
@@ -13,11 +22,14 @@ export default class Footer extends Component {
                 >
                 </IconButton>
                 <Typography variant="caption" color="inherit">
-                    <Button variant="contained" color="secondary" onClick={/*this.resetState*/this.props.resetState}>Reset</Button>
-                    <Button variant="contained" color="secondary" onClick={/*this.handleShuffle*/this.props.shuffleSchedule}>Shuffle</Button>
+                    <Button className={classes.btnOptions} variant="contained" color="secondary" onClick={/*this.resetState*/this.props.resetState}>Reset</Button>
+                    <Button className={classes.btnOptions} variant="contained" color="secondary" onClick={/*this.handleShuffle*/this.props.shuffleSchedule}>Shuffle</Button>
+                    <Button className={classes.btnOptions} variant="contained" color="secondary" onClick={/*this.handleShuffle*/this.props.toggleEditMode}>Edit mode</Button>
                 </Typography>
                 </Toolbar>
             </AppBar>
         )
     }
 }
+
+export default withStyles(styles)(Footer);

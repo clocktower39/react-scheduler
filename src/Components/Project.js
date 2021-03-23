@@ -19,6 +19,9 @@ const styles = (theme) => ({
         flexDirection: 'row',
         justifyContent: 'space-around'
     },
+    hideIconContainer: {
+        display: 'none',
+    },
     unassignedAgent: {
         color: '#c51162'
     }
@@ -43,7 +46,7 @@ class Project extends Component {
                 <p className={this.isAgentAssigned(classes)}>
                     {this.props.agent}
                 </p>
-                <div className={classes.iconContainer}>
+                <div className={(this.props.editMode)?classes.iconContainer:classes.hideIconContainer}>
                     <Button onClick={this.props.higherPriority}><Icon name="arrow-left" /></Button>
                     <Button onClick={this.props.removeTask}><Icon name="trash" /></Button>
                     <Button onClick={this.props.lowerPriority}><Icon name="arrow-right" /></Button>

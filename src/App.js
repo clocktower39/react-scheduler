@@ -7,7 +7,8 @@ import './App.css';
 
 const INITIAL_STATE = {
   tasks: [...tasks],
-  agents: [...agents]
+  agents: [...agents],
+  editMode: false
 };
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
     this.handleShuffle = this.handleShuffle.bind(this);
     this.handlePriorityChange = this.handlePriorityChange.bind(this);
     this.handleRemoveTask = this.handleRemoveTask.bind(this);
+    this.handleEditToggle = this.handleEditToggle.bind(this);
   }
   resetState = () => {
     this.setState(JSON.parse(JSON.stringify(INITIAL_STATE)));
@@ -39,6 +41,7 @@ class App extends Component {
       return {
         newTasks,
         newAgents,
+        editMode: state.editMode,
       };
     });
   };
@@ -77,6 +80,7 @@ class App extends Component {
       return {
         newTasks,
         newAgents,
+        editMode: state.editMode,
       };
     });
   };
@@ -126,6 +130,7 @@ class App extends Component {
       return {
         tasks: newTasks,
         agents: newAgents,
+        editMode: state.editMode,
       };
     });
   };
@@ -145,6 +150,7 @@ class App extends Component {
       return {
         tasks: newTasks,
         agents: newAgents,
+        editMode: state.editMode,
       };
     });
 
@@ -168,7 +174,15 @@ class App extends Component {
       console.log(`${task.task} : ${task.priority}`)
     })
   };
-
+  handleEditToggle = () => {
+    this.setState((state) => {
+      return {
+        tasks: state.tasks,
+        agents: state.agents,
+        editMode: !state.editMode,
+      }
+    })
+  }
   render() {
     return (
       <div className="App">
@@ -179,11 +193,14 @@ class App extends Component {
           tasks={this.state.tasks}
           changePriority={this.handlePriorityChange}
           removeTask={this.handleRemoveTask}
+          editMode={this.state.editMode}
         />
 
         <Footer
           resetState={this.resetState}
           shuffleSchedule={this.handleShuffle}
+          toggleEditMode={this.handleEditToggle}
+          editMode={this.state.editMode.toString()}
         />
       </div>
     );
