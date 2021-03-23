@@ -43,7 +43,7 @@ class Project extends Component {
         return (
         <Grid style={{order: this.props.order}} className={classes.root} container item xs={12} sm={6} md={4} lg={3}>
             <Paper className={classes.paper} >
-                {(!this.props.editMode)?(<Typography variant={'body1'}>{this.props.projectName}</Typography>):(<><TextField className={classes.input} placeholder='Task Name' value={this.props.projectName} /><br /><Input placeholder='Load Score' /></>)}
+                {(!this.props.editMode)?(<Typography variant={'body1'}>{this.props.projectName}</Typography>):(<><TextField className={classes.input} placeholder='Task Name' value={this.props.projectName} /><br /><Input placeholder='Load Score' value={this.props.taskLoadScore}/></>)}
                 <Typography variant={'body1'} className={this.isAgentAssigned(classes)}>
                     {this.props.agent}
                 </Typography>
