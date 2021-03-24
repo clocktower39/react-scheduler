@@ -30,7 +30,7 @@ const styles = (theme) => ({
     display: "none",
   },
   unassignedAgent: {
-    color: "#c51162",
+    color: "#000000",
   },
 });
 

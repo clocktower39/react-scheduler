@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Button,
   Divider,
   Drawer,
   List,
@@ -9,7 +10,7 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { PersonSharp } from "@material-ui/icons";
+import { PersonSharp, Cancel } from "@material-ui/icons";
 
 const styles = makeStyles({
   list: {
@@ -28,17 +29,26 @@ class AgentDrawer extends Component {
         <React.Fragment key={"left"}>
           <Drawer anchor={"left"} open={this.props.isLeftOpen}>
             <div role="presentation">
+              <Cancel onClick={this.props.toggleDrawer()} />
               <List className={classes.list}>
                 {this.props.agents.map((agent) => (
                   <ListItem
                     button
                     key={agent.lastName}
-                    onClick={this.props.toggleDrawer()}
                   >
                     <ListItemIcon>
                       <PersonSharp />
                     </ListItemIcon>
-                    <ListItemText primary={agent.firstName} />
+                    <ListItemText primary={agent.load} />
+                    <ListItemText primary={`${agent.firstName} ${agent.lastName}`}/>
+                    <List>
+                        {agent.programs.map(program => (
+                          <ListItem>{program}</ListItem>
+                        ))}
+                    </List>
+                    <List>
+
+                    </List>
                   </ListItem>
                 ))}
               </List>
