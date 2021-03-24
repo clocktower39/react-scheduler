@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  Button,
+  IconButton,
   Divider,
   Drawer,
   List,
@@ -29,7 +29,7 @@ class AgentDrawer extends Component {
         <React.Fragment key={"left"}>
           <Drawer anchor={"left"} open={this.props.isLeftOpen}>
             <div role="presentation">
-              <Cancel onClick={this.props.toggleDrawer()} />
+              <IconButton><Cancel onClick={this.props.toggleDrawer()} /></IconButton>
               <List className={classes.list}>
                 {this.props.agents.map((agent) => (
                   <ListItem

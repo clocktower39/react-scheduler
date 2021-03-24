@@ -42,10 +42,9 @@ class App extends Component {
       });
 
       return {
+        ...state,
         newTasks,
         newAgents,
-        editMode: state.editMode,
-        left: state.left,
       };
     });
   };
@@ -82,10 +81,9 @@ class App extends Component {
         }
       });
       return {
+        ...state,
         newTasks,
         newAgents,
-        editMode: state.editMode,
-        left: state.left,
       };
     });
   };
@@ -133,10 +131,9 @@ class App extends Component {
       }
       newTasks = newTasks.sort((a, b) => a.priority > b.priority);
       return {
+        ...state,
         tasks: newTasks,
         agents: newAgents,
-        editMode: state.editMode,
-        left: state.left,
       };
     });
   };
@@ -150,14 +147,9 @@ class App extends Component {
         task.priority = index + 1;
       });
 
-      // dont touch agents, no need
-      const newAgents = [...state.agents];
-
       return {
+        ...state,
         tasks: newTasks,
-        agents: newAgents,
-        editMode: state.editMode,
-        left: state.left,
       };
     });
 
@@ -168,19 +160,10 @@ class App extends Component {
         return task;
       });
 
-      // dont touch agents, no need
-      const newAgents = [...state.agents];
-
       return {
+        ...state,
         tasks: newTasks,
-        agents: newAgents,
-        editMode: state.editMode,
-        left: state.left,
       };
-    });
-
-    this.state.tasks.forEach((task) => {
-      console.log(`${task.task} : ${task.priority}`);
     });
   };
   handleEditToggle = () => {
