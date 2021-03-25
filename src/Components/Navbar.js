@@ -6,7 +6,7 @@ import {
   Fab,
   withStyles,
 } from "@material-ui/core";
-import { Add, CodeSharp } from "@material-ui/icons";
+import { Add, PersonSharp } from "@material-ui/icons";
 
 const styles = (theme) => ({
   root: {
@@ -28,7 +28,7 @@ class Navbar extends Component {
           className={classes.addIcon}
           size="small"
         >
-          <CodeSharp />
+          <PersonSharp />
         </Fab>
 
         <Typography variant={"h5"}>Schedule Generator</Typography>

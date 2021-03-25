@@ -5,20 +5,30 @@ import {
   Divider,
   Drawer,
   List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   withStyles,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { PersonSharp, Cancel } from "@material-ui/icons";
-
+import { Cancel } from "@material-ui/icons";
+import AgentInfo from "./AgentInfo";
+// fix close button to right side
 const styles = makeStyles({
+  root: {
+    position: 'relative',
+  },
   fullList: {
     width: "auto",
   },
-  closeDrawerIcon: {
-    
+  closeBtnContainer: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'flex-end',
   }
 });
 
@@ -28,31 +38,29 @@ class AgentDrawer extends Component {
     return (
       <div className={classes.root}>
         <React.Fragment key={"left"}>
-          <Drawer anchor={"left"} open={this.props.isLeftOpen}>
+          <Drawer anchor={"left"} open={this.props.isLeftOpen} variant="persistent">
             <div role="presentation">
-              <Button>Show All</Button>
-              <IconButton onClick={this.props.toggleDrawer()} className={classes.closeDrawerIcon}><Cancel/></IconButton>
+              <div className="closeBtnContainer">
+                <IconButton onClick={this.props.toggleDrawer()}><Cancel/></IconButton>
+              </div>
               <List className={classes.list}>
-                {this.props.agents.map((agent) => (
-                  <ListItem
-                    button
-                    key={agent.lastName}
-                  >
-                    <ListItemIcon><PersonSharp /></ListItemIcon>
-                    <ListItemText primary={`${agent.firstName} ${agent.lastName}`}/>
-                    {/* <ListItemText primary={'Programs'}>
-                    <List>
-                        {agent.programs.map(program => (
-                          <ListItem>{program}</ListItem>
+                <TableContainer component={Paper}>
+                  <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Load</TableCell>
+                            <TableCell>Available</TableCell>
+                            <TableCell>Programs</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.props.agents.map((agent) => (
+                        <AgentInfo agent={agent} />
                         ))}
-                    </List>
-                    </ListItemText>
-                    <ListItemText primary={agent.load} /> */}
-                    <List>
-
-                    </List>
-                  </ListItem>
-                ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </List>
               <Divider />
             </div>
