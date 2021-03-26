@@ -1,14 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Toolbar,
   Typography,
   Tooltip,
   Fab,
-  withStyles,
+  makeStyles,
 } from "@material-ui/core";
 import { Add, PersonSharp } from "@material-ui/icons";
+import { useDispatch } from 'react-redux';
+import { leftToggle } from '../Redux/actions';
 
-const styles = (theme) => ({
+const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "row",
@@ -18,13 +20,13 @@ const styles = (theme) => ({
   addIcon: {},
 });
 
-class Navbar extends Component {
-  render() {
-    const { classes } = this.props;
+export default function Navbar() {
+    const classes = useStyles();
+    const dispatch = useDispatch();
     return (
       <Toolbar className={classes.root}>
         <Fab
-          onClick={this.props.handleDrawerToggle()}
+          onClick={()=>dispatch(leftToggle({}))}
           className={classes.addIcon}
           size="small"
         >
@@ -41,6 +43,3 @@ class Navbar extends Component {
       </Toolbar>
     );
   }
-}
-
-export default withStyles(styles)(Navbar);

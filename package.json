@@ -11,6 +11,7 @@
     "awesome-react-icons": "^1.4.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.3",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },

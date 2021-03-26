@@ -1,15 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Toolbar,
   Typography,
   AppBar,
   IconButton,
   Button,
-  withStyles,
+  makeStyles,
 } from "@material-ui/core";
 import { Shuffle, Edit, Cached as Reset } from '@material-ui/icons';
+import { connect, useDispatch } from 'react-redux';
+import { editToggle, resetAssignments, assignTask } from '../Redux/actions';
 
-const styles = (theme) => ({
+const useStyles = makeStyles({
   root: {
     display: "flex",
     flexDirection: "row",
@@ -21,9 +23,10 @@ const styles = (theme) => ({
   },
 });
 
-class Footer extends Component {
-  render() {
-    const { classes } = this.props;
+function Footer(props) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
     return (
       <AppBar className={classes.root} position="relative" id="footer">
         <Toolbar>
@@ -33,7 +36,7 @@ class Footer extends Component {
               className={classes.btnOptions}
               variant="contained"
               color="secondary"
-              onClick={this.props.resetState}
+              onClick={null}
             >
               <Reset />
             </Button>
@@ -41,7 +44,26 @@ class Footer extends Component {
               className={classes.btnOptions}
               variant="contained"
               color="secondary"
-              onClick={this.props.shuffleSchedule}
+              onClick={()=>{
+                props.agents.forEach((agent, index) => {
+                  dispatch(resetAssignments(index))
+                })
+
+                props.tasks.forEach((task,taskIndex) => {
+
+                  for(let agentIndex = 0; agentIndex < props.agents.length; agentIndex++){
+                    if(props.agents[agentIndex].load + task.loadScore <= 15 && props.agents[agentIndex].available === true && props.agents[agentIndex].programs.includes(task.associatedProgram)){
+                      //dispatch stuff here
+                      console.log('working?')
+                      dispatch(assignTask(agentIndex, taskIndex))
+                      // newState.agents[agentLoopIndex].load += taskLoop.loadScore;
+                      // newState.agents[agentLoopIndex].assignedJobs.push(taskLoop);
+                      // taskLoop.assignedAgent = newState.agents[agentLoopIndex].firstName;
+                        break;
+                    }
+                  }
+                })
+              }}
             >
               <Shuffle />
             </Button>
@@ -49,7 +71,7 @@ class Footer extends Component {
               className={classes.btnOptions}
               variant="contained"
               color="secondary"
-              onClick={this.props.toggleEditMode}
+              onClick={()=>dispatch(editToggle({}))}
             >
               <Edit />
             </Button>
@@ -57,7 +79,15 @@ class Footer extends Component {
         </Toolbar>
       </AppBar>
     );
-  }
 }
 
-export default withStyles(styles)(Footer);
+const mapStateToProps = state => {
+  return {
+    agents: state.agents,
+    tasks: state.tasks,
+    editMode: state.editMode,
+    left: state.left,
+  };
+};
+
+export default connect(mapStateToProps)(Footer);
