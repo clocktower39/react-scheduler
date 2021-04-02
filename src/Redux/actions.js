@@ -6,6 +6,7 @@ export const RESET_ASSIGNMENTS = 'RESET_ASSIGNMENTS';
 export const REMOVE_TASK = 'REMOVE_TASK';
 export const LOWER_PRIORITY = 'LOWER_PRIORITY';
 export const HIGHER_PRIORITY = 'HIGHER_PRIORITY';
+export const SHUFFLE_ARR = 'SHUFFLE_ARR';
 
 export function editToggle() {
     return {
@@ -59,5 +60,10 @@ export function higherPriority(priority) {
     return {
         type: HIGHER_PRIORITY,
         payload: priority
+    }
+}
+export function shuffleArr() {
+    return {
+        type: SHUFFLE_ARR
     }
 }

@@ -54,7 +54,7 @@ function AgentDrawer(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                      {props.agents.map((agent,index) => (
+                      {props.agents.sort((a, b) => a.firstName > b.firstName).map((agent,index) => (
                         <AgentInfo key={`${agent.firstName}${index}`} agent={agent} />
                         ))}
                     </TableBody>
@@ -71,8 +71,8 @@ function AgentDrawer(props) {
 
 const mapStateToProps = state => {
   return {
-    agents: state.agents,
-    tasks: state.tasks,
+    agents: [...state.agents],
+    tasks: [...state.tasks],
     editMode: state.editMode,
     left: state.left,
   };

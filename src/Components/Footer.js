@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Shuffle, Edit, Cached as Reset } from '@material-ui/icons';
 import { connect, useDispatch } from 'react-redux';
-import { editToggle, resetAssignments, assignTask } from '../Redux/actions';
+import { editToggle, resetAssignments, assignTask, shuffleArr } from '../Redux/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 function Footer(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  
     return (
       <AppBar className={classes.root} position="relative" id="footer">
         <Toolbar>
@@ -36,7 +36,10 @@ function Footer(props) {
               className={classes.btnOptions}
               variant="contained"
               color="secondary"
-              onClick={null}
+              onClick={()=>{
+                props.agents.forEach((agent, index) => {
+                  dispatch(resetAssignments(index))
+                })}}
             >
               <Reset />
             </Button>
@@ -52,13 +55,10 @@ function Footer(props) {
                 props.tasks.forEach((task,taskIndex) => {
 
                   for(let agentIndex = 0; agentIndex < props.agents.length; agentIndex++){
+                    dispatch(shuffleArr(props.agents))
                     if(props.agents[agentIndex].load + task.loadScore <= 15 && props.agents[agentIndex].available === true && props.agents[agentIndex].programs.includes(task.associatedProgram)){
-                      //dispatch stuff here
                       console.log('working?')
                       dispatch(assignTask(agentIndex, taskIndex))
-                      // newState.agents[agentLoopIndex].load += taskLoop.loadScore;
-                      // newState.agents[agentLoopIndex].assignedJobs.push(taskLoop);
-                      // taskLoop.assignedAgent = newState.agents[agentLoopIndex].firstName;
                         break;
                     }
                   }
