@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { Shuffle, Edit, Cached as Reset } from '@material-ui/icons';
 import { connect, useDispatch } from 'react-redux';
-import { editToggle, resetAssignments, assignTask, shuffleArr } from '../Redux/actions';
+import { editToggle, resetAssignments, assignTask, shuffleThenSortArr } from '../Redux/actions';
 
 const useStyles = makeStyles({
   root: {
@@ -55,9 +55,9 @@ function Footer(props) {
                 props.tasks.forEach((task,taskIndex) => {
 
                   for(let agentIndex = 0; agentIndex < props.agents.length; agentIndex++){
-                    dispatch(shuffleArr(props.agents))
+                    dispatch(shuffleThenSortArr());
                     if(props.agents[agentIndex].load + task.loadScore <= 15 && props.agents[agentIndex].available === true && props.agents[agentIndex].programs.includes(task.associatedProgram)){
-                      console.log('working?')
+
                       dispatch(assignTask(agentIndex, taskIndex))
                         break;
                     }

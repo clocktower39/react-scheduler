@@ -1,4 +1,4 @@
-import { ASSIGN_TASK, RESET_ASSIGNMENTS, EDIT_TOGGLE, LEFT_TOGGLE, REMOVE_TASK, LOWER_PRIORITY, HIGHER_PRIORITY, SHUFFLE_ARR } from './actions';
+import { ASSIGN_TASK, RESET_ASSIGNMENTS, EDIT_TOGGLE, LEFT_TOGGLE, REMOVE_TASK, LOWER_PRIORITY, HIGHER_PRIORITY, SHUFFLE_THEN_SORT_ARR } from './actions';
 import { agents, tasks, editMode, left } from './states';
 
 export let reducer = (state = { agents, tasks, editMode, left }, action) => {
@@ -67,9 +67,9 @@ export let reducer = (state = { agents, tasks, editMode, left }, action) => {
             console.log('RESET_ASSIGNMENTS');
             newState.agents[action.payload].load = 0;
             return newState;
-        case SHUFFLE_ARR:
-            console.log('SHUFFLE_ARR');
-            newState.agents = shuffle(newState.agents);
+        case SHUFFLE_THEN_SORT_ARR:
+            console.log('SHUFFLE_THEN_SORT_ARR');
+            newState.agents = shuffle(newState.agents).sort((a, b) => a.load > b.load);
             return newState;
         default:
             break;
