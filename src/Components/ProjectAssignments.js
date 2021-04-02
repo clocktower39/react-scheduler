@@ -1,35 +1,48 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import { Container, Grid, Box } from "@material-ui/core";
 import Project from "./Project";
+import { useDispatch } from 'react-redux';
+import { removeTask, lowerPriority, higherPriority } from '../Redux/actions';
 
-export default class ProjectAssignments extends Component {
-  render() {
+function ProjectAssignments(props) {
+
+  const dispatch = useDispatch();
     return (
       <Container maxWidth="lg" spacing={3}>
         <Box display="block" style={{ height: "100%", padding: 0, margin: 0 }}>
           <Grid container spacing={3} style={{ flexGrow: 1, padding: "15px" }}>
-            {this.props.tasks.map((task) => (
+            {props.tasks.map((task) => (
               <Project
+                key={task.task}
                 order={task.priority}
                 taskLoadScore={task.loadScore}
-                removeTask={() => {
-                  this.props.removeTask(task.priority);
-                }}
-                lowerPriority={() => {
-                  this.props.changePriority(task.priority, "up");
-                }}
-                higherPriority={() => {
-                  this.props.changePriority(task.priority, "down");
-                }}
-                key={task.task}
-                editMode={this.props.editMode}
+                editMode={props.editMode}
                 projectName={task.task}
                 agent={task.assignedAgent}
+                removeTask={() => {
+                  dispatch(removeTask(task.priority));
+                }}
+                lowerPriority={() => {
+                  dispatch(lowerPriority(task.priority));
+                }}
+                higherPriority={() => {
+                  dispatch(higherPriority(task.priority));
+                }}
               />
             ))}
           </Grid>
         </Box>
       </Container>
     );
-  }
 }
+const mapStateToProps = state => {
+  return {
+    agents: [...state.agents],
+    tasks: [...state.tasks],
+    editMode: state.editMode,
+    left: state.left,
+  };
+};
+
+export default connect(mapStateToProps)(ProjectAssignments);

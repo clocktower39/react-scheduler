@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import {
-  Button,
   IconButton,
   Divider,
   Drawer,
   List,
-  withStyles,
+  makeStyles,
   Table,
   TableBody,
   TableCell,
@@ -14,11 +13,12 @@ import {
   TableRow,
   Paper,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { Cancel } from "@material-ui/icons";
 import AgentInfo from "./AgentInfo";
-// fix close button to right side
-const styles = makeStyles({
+import { connect, useDispatch } from 'react-redux';
+import { leftToggle } from '../Redux/actions';
+
+const useStyles = makeStyles({
   root: {
     position: 'relative',
   },
@@ -28,20 +28,19 @@ const styles = makeStyles({
   closeBtnContainer: {
     display: 'flex',
     width: '100%',
-    justifyContent: 'flex-end',
   }
 });
 
-class AgentDrawer extends Component {
-  render() {
-    const { classes } = this.props;
+function AgentDrawer(props) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
     return (
       <div className={classes.root}>
         <React.Fragment key={"left"}>
-          <Drawer anchor={"left"} open={this.props.isLeftOpen} variant="persistent">
+          <Drawer anchor={"left"} open={props.left} variant="persistent">
             <div role="presentation">
               <div className="closeBtnContainer">
-                <IconButton onClick={this.props.toggleDrawer()}><Cancel/></IconButton>
+                <IconButton onClick={()=>dispatch(leftToggle())}><Cancel/></IconButton>
               </div>
               <List className={classes.list}>
                 <TableContainer component={Paper}>
@@ -55,8 +54,8 @@ class AgentDrawer extends Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                      {this.props.agents.map((agent) => (
-                        <AgentInfo agent={agent} />
+                      {props.agents.sort((a, b) => a.firstName > b.firstName).map((agent,index) => (
+                        <AgentInfo key={`${agent.firstName}${index}`} agent={agent} />
                         ))}
                     </TableBody>
                   </Table>
@@ -68,7 +67,15 @@ class AgentDrawer extends Component {
         </React.Fragment>
       </div>
     );
-  }
 }
 
-export default withStyles(styles)(AgentDrawer);
+const mapStateToProps = state => {
+  return {
+    agents: [...state.agents],
+    tasks: [...state.tasks],
+    editMode: state.editMode,
+    left: state.left,
+  };
+};
+
+export default connect(mapStateToProps)(AgentDrawer);
