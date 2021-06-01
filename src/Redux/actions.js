@@ -2,9 +2,7 @@ export const EDIT_TOGGLE = 'EDIT_TOGGLE';
 export const ASSIGN_TASK = 'ASSIGN_TASK';
 export const RESET_STATE = 'RESET_STATE';
 export const RESET_ASSIGNMENTS = 'RESET_ASSIGNMENTS';
-export const REMOVE_TASK = 'REMOVE_TASK';
-export const LOWER_PRIORITY = 'LOWER_PRIORITY';
-export const HIGHER_PRIORITY = 'HIGHER_PRIORITY';
+export const MODIFY_TASKS = 'MODIFY_TASKS';
 export const SHUFFLE_THEN_SORT_ARR = 'SHUFFLE_THEN_SORT_ARR';
 
 export function editToggle() {
@@ -46,7 +44,7 @@ export function removeTask(priority) {
         });
 
         return dispatch({
-            type: REMOVE_TASK,
+            type: MODIFY_TASKS,
             tasks,
         });
     }
@@ -58,16 +56,17 @@ export function lowerPriority(priority) {
 
         let tasks = state.tasks;
 
-        //raise target priority value to lower on scale
-
-        //current target
-        tasks[priority-1].priority = priority + 1;
-        //transpose with target
-        tasks[priority].priority = priority;
-        tasks.sort((a,b) => a.priority - b.priority);
+        if(priority < tasks.length){
+            //raise target priority value to lower on scale
+            //current target
+            tasks[priority-1].priority = priority + 1;
+            //transpose with target
+            tasks[priority].priority = priority;
+            tasks.sort((a,b) => a.priority - b.priority);
+        }
 
         return dispatch({
-            type: LOWER_PRIORITY,
+            type: MODIFY_TASKS,
             tasks,
         });
     }
@@ -78,17 +77,18 @@ export function higherPriority(priority) {
 
         let tasks = state.tasks;
 
-        //lower target priority value to raise on scale
+        if(priority >= 2){
+            //lower target priority value to raise on scale
+            //current target
+            tasks[priority-1].priority = priority - 1;
+            //transpose with target
+            tasks[priority-2].priority = priority;
 
-        //current target
-        tasks[priority-1].priority = priority - 1;
-        //transpose with target
-        tasks[priority-2].priority = priority;
-
-        tasks.sort((a,b) => a.priority - b.priority);
+            tasks.sort((a,b) => a.priority - b.priority);
+        }
 
         return dispatch({
-            type: HIGHER_PRIORITY,
+            type: MODIFY_TASKS,
             tasks,
         });
     }

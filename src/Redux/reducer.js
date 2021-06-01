@@ -1,9 +1,8 @@
-import { ASSIGN_TASK, RESET_ASSIGNMENTS, EDIT_TOGGLE, REMOVE_TASK, LOWER_PRIORITY, HIGHER_PRIORITY, SHUFFLE_THEN_SORT_ARR } from './actions';
+import { ASSIGN_TASK, RESET_ASSIGNMENTS, EDIT_TOGGLE, MODIFY_TASKS, SHUFFLE_THEN_SORT_ARR } from './actions';
 import { agents, tasks, editMode } from './states';
 
 export let reducer = (state = { agents, tasks, editMode }, action) => {
     let newState = {...state};
-    const maxIndex = newState.tasks.length;
 
     switch(action.type){
         case EDIT_TOGGLE:
@@ -11,17 +10,7 @@ export let reducer = (state = { agents, tasks, editMode }, action) => {
                 ...state,
                 editMode: !state.editMode
             };
-        case REMOVE_TASK:
-            return {
-                ...state,
-                tasks: [...action.tasks],
-            };
-        case LOWER_PRIORITY:
-            return {
-                ...state,
-                tasks: [...action.tasks],
-            };
-        case HIGHER_PRIORITY:
+        case MODIFY_TASKS:
             return {
                 ...state,
                 tasks: [...action.tasks],
