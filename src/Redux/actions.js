@@ -53,15 +53,44 @@ export function removeTask(priority) {
 }
 
 export function lowerPriority(priority) {
-    return {
-        type: LOWER_PRIORITY,
-        payload: priority
+    return async (dispatch, getState) => {
+        const state = getState();
+
+        let tasks = state.tasks;
+
+        //raise target priority value to lower on scale
+
+        //current target
+        tasks[priority-1].priority = priority + 1;
+        //transpose with target
+        tasks[priority].priority = priority;
+        tasks.sort((a,b) => a.priority - b.priority);
+
+        return dispatch({
+            type: LOWER_PRIORITY,
+            tasks,
+        });
     }
 }
 export function higherPriority(priority) {
-    return {
-        type: HIGHER_PRIORITY,
-        payload: priority
+    return async (dispatch, getState) => {
+        const state = getState();
+
+        let tasks = state.tasks;
+
+        //lower target priority value to raise on scale
+
+        //current target
+        tasks[priority-1].priority = priority - 1;
+        //transpose with target
+        tasks[priority-2].priority = priority;
+
+        tasks.sort((a,b) => a.priority - b.priority);
+
+        return dispatch({
+            type: HIGHER_PRIORITY,
+            tasks,
+        });
     }
 }
 export function shuffleThenSortArr(agents) {

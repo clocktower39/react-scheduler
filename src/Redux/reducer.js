@@ -17,19 +17,15 @@ export let reducer = (state = { agents, tasks, editMode }, action) => {
                 tasks: [...action.tasks],
             };
         case LOWER_PRIORITY:
-            newState.tasks[action.payload-1].priority = action.payload + 1;
-            newState.tasks[action.payload].priority = action.payload;
-            return newState;
+            return {
+                ...state,
+                tasks: [...action.tasks],
+            };
         case HIGHER_PRIORITY:
-            for (let taskIndex = 0; taskIndex < maxIndex; taskIndex++) {
-                if (taskIndex + 1 === action.payload && action.payload > 1) {
-                    newState.tasks[taskIndex - 1].priority = action.payload;
-                    newState.tasks[taskIndex].priority = action.payload - 1;
-                    break;
-                }
-            }
-            newState.tasks = newState.tasks.sort((a, b) => a.priority > b.priority);
-            return newState;
+            return {
+                ...state,
+                tasks: [...action.tasks],
+            };
         case ASSIGN_TASK:
             newState.tasks[action.payload.taskIndex].assignedAgent = newState.agents[action.payload.agentIndex].firstName;
             newState.agents[action.payload.agentIndex].load += newState.tasks[action.payload.taskIndex].loadScore;
