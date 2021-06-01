@@ -37,9 +37,18 @@ export function resetAssignments(index) {
 }
 
 export function removeTask(priority) {
-    return {
-        type: REMOVE_TASK,
-        payload: priority
+    return async (dispatch, getState) => {
+        const state = getState();
+        const filtered = state.tasks.filter((task) => task.priority !== priority);
+        const tasks = filtered.map((task, index) => {
+            task.priority = index + 1
+            return task;
+        });
+
+        return dispatch({
+            type: REMOVE_TASK,
+            tasks,
+        });
     }
 }
 

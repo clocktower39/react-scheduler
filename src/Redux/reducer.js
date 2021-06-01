@@ -12,11 +12,10 @@ export let reducer = (state = { agents, tasks, editMode }, action) => {
                 editMode: !state.editMode
             };
         case REMOVE_TASK:
-            newState.tasks = newState.tasks.filter((task) => task.priority !== action.payload);
-            newState.tasks.forEach((task, index) => {
-                task.priority = index + 1;
-            });
-            return newState;
+            return {
+                ...state,
+                tasks: [...action.tasks],
+            };
         case LOWER_PRIORITY:
             newState.tasks[action.payload-1].priority = action.payload + 1;
             newState.tasks[action.payload].priority = action.payload;

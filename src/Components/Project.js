@@ -52,8 +52,8 @@ class Project extends Component {
         container
         item
         xs={12}
-        sm={6}
-        md={4}
+        sm={12}
+        md={6}
         lg={3}
       >
         <Paper className={classes.paper}>

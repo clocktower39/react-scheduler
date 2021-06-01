@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     flexDirection: "row",
     justifyContent: "center",
     backgroundColor: "#37464f",
+    zIndex: 1200,
   },
   btnOptions: {
     margin: "0 5px",
