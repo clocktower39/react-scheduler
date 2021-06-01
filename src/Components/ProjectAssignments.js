@@ -41,7 +41,6 @@ const mapStateToProps = state => {
     agents: [...state.agents],
     tasks: [...state.tasks],
     editMode: state.editMode,
-    left: state.left,
   };
 };
 

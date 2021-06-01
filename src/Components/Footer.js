@@ -55,7 +55,7 @@ function Footer(props) {
                 props.tasks.forEach((task,taskIndex) => {
 
                   for(let agentIndex = 0; agentIndex < props.agents.length; agentIndex++){
-                    dispatch(shuffleThenSortArr());
+                    dispatch(shuffleThenSortArr(props.agents));
                     if(props.agents[agentIndex].load + task.loadScore <= 15 && props.agents[agentIndex].available === true && props.agents[agentIndex].programs.includes(task.associatedProgram)){
 
                       dispatch(assignTask(agentIndex, taskIndex))

@@ -4,30 +4,13 @@ import { agents, tasks, editMode } from './states';
 export let reducer = (state = { agents, tasks, editMode }, action) => {
     let newState = {...state};
     const maxIndex = newState.tasks.length;
-    const shuffle = (array) => {
-        var currentIndex = array.length,
-          temporaryValue,
-          randomIndex;
-    
-        // While there remain elements to shuffle...
-        while (0 !== currentIndex) {
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-    
-          // And swap it with the current element.
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-    
-        return array;
-      }
 
     switch(action.type){
         case EDIT_TOGGLE:
-            newState.editMode = !state.editMode;
-            return newState;
+            return {
+                ...state,
+                editMode: !state.editMode
+            };
         case REMOVE_TASK:
             newState.tasks = newState.tasks.filter((task) => task.priority !== action.payload);
             newState.tasks.forEach((task, index) => {
@@ -58,8 +41,10 @@ export let reducer = (state = { agents, tasks, editMode }, action) => {
             newState.agents[action.payload].load = 0;
             return newState;
         case SHUFFLE_THEN_SORT_ARR:
-            newState.agents = shuffle(newState.agents).sort((a, b) => a.load > b.load);
-            return newState;
+            return {
+                ...state,
+                agents: [...action.agents]
+            };
         default:
             break;
     }

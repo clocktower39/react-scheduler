@@ -55,8 +55,32 @@ export function higherPriority(priority) {
         payload: priority
     }
 }
-export function shuffleThenSortArr() {
-    return {
-        type: SHUFFLE_THEN_SORT_ARR
+export function shuffleThenSortArr(agents) {
+    return async (dispatch, getState) => {
+        const shuffle = (array) => {
+            var currentIndex = array.length,
+              temporaryValue,
+              randomIndex;
+        
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+              // Pick a remaining element...
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+        
+              // And swap it with the current element.
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+        
+            return array;
+          }
+        const newAgents = shuffle(agents).sort((a, b) => a.load > b.load);
+
+        return dispatch({
+            type: SHUFFLE_THEN_SORT_ARR,
+            agents: newAgents,
+        })
     }
 }
