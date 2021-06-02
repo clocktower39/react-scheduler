@@ -83,7 +83,6 @@ export function higherPriority(priority) {
             tasks[priority-1].priority = priority - 1;
             //transpose with target
             tasks[priority-2].priority = priority;
-
             tasks.sort((a,b) => a.priority - b.priority);
         }
 

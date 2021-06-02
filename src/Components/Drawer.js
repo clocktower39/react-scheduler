@@ -1,7 +1,7 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -20,10 +20,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
   Paper,
 } from "@material-ui/core";
 import AgentInfo from "./AgentInfo";
-import { useSelector } from 'react-redux';
 
 const drawerWidth = 400;
 
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const theme = useTheme();
   const agents = useSelector(state => state.agents)

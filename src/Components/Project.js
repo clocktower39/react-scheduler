@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   Button,
+  Divider,
   Paper,
   Grid,
   TextField,
@@ -52,14 +53,15 @@ class Project extends Component {
         container
         item
         xs={12}
-        sm={12}
+        sm={6}
         md={6}
         lg={3}
       >
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"h5"}>{this.props.projectName}</Typography>
+              <Typography variant={"h6"}>{this.props.projectName}</Typography>
+              <Divider />
               <Typography
                 variant={"body1"}
                 className={this.isAgentAssigned(classes)}
