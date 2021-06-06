@@ -1,4 +1,5 @@
 export const EDIT_TOGGLE = 'EDIT_TOGGLE';
+export const FLIP_CARD_TOGGLE = 'FLIP_CARD_TOGGLE';
 export const ASSIGN_TASK = 'ASSIGN_TASK';
 export const RESET_STATE = 'RESET_STATE';
 export const RESET_ASSIGNMENTS = 'RESET_ASSIGNMENTS';
@@ -8,6 +9,12 @@ export const SHUFFLE_THEN_SORT_ARR = 'SHUFFLE_THEN_SORT_ARR';
 export function editToggle() {
     return {
         type: EDIT_TOGGLE,
+    }
+}
+
+export function flipCardToggle() {
+    return {
+        type: FLIP_CARD_TOGGLE,
     }
 }
 

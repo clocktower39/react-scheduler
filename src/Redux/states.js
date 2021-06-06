@@ -173,3 +173,5 @@ export const tasks = [
 ];
 
 export const editMode = false;
+
+export const flipCardToggle = true;

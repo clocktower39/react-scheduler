@@ -36,13 +36,6 @@ const styles = (theme) => ({
 });
 
 class Project extends Component {
-  constructor(props) {
-    super(props);
-
-    this.isAgentAssigned = this.isAgentAssigned.bind(this);
-  }
-  isAgentAssigned = (classes) =>
-    this.props.agent === "Unassigned" ? classes.unassignedAgent : null;
 
   render() {
     const { classes } = this.props;
@@ -60,26 +53,32 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"body1"}>{this.props.projectName}</Typography>
+              <Typography variant={"body1"}>{this.props.agent.firstName} {this.props.agent.lastName}</Typography>
               <Divider />
               <Typography
                 variant={"body1"}
-                className={this.isAgentAssigned(classes)}
               >
-                {this.props.agent}
+                {this.props.agent.load}
               </Typography>
             </>
           ) : (
             <>
+            <TextField
+              className={classes.input}
+              label="First Name"
+              defaultValue={this.props.agent.firstName}
+            />
+            <br />
               <TextField
                 className={classes.input}
-                label="Task Name"
-                defaultValue={this.props.projectName}
+                label="Last Name"
+                defaultValue={this.props.agent.lastName}
               />
               <br />
               <TextField
-                label="Load Score"
-                defaultValue={this.props.taskLoadScore}
+                label="Load"
+                defaultValue={this.props.agent.load}
+                disabled={true}
               />
             </>
           )}
@@ -88,14 +87,8 @@ class Project extends Component {
               this.props.editMode ? classes.iconContainer : classes.hide
             }
           >
-            <Button onClick={this.props.higherPriority}>
-              <Icon name="arrow-left" />
-            </Button>
-            <Button onClick={this.props.removeTask}>
+            <Button>
               <Icon name="trash" />
-            </Button>
-            <Button onClick={this.props.lowerPriority}>
-              <Icon name="arrow-right" />
             </Button>
           </div>
         </Paper>

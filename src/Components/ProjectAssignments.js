@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Container, Grid, Box } from "@material-ui/core";
 import Project from "./Project";
+import Agent from "./Agent";
 import { useDispatch } from 'react-redux';
 import { removeTask, lowerPriority, higherPriority } from '../Redux/actions';
 
@@ -12,7 +13,8 @@ function ProjectAssignments(props) {
       <Container maxWidth="lg" spacing={3}>
         <Box display="block" style={{ height: "100%", padding: 0, margin: 0 }}>
           <Grid container spacing={3} style={{ flexGrow: 1, padding: "15px" }}>
-            {props.tasks.map((task) => (
+            {props.flipCardToggle?
+            props.tasks.map((task) => (
               <Project
                 key={task.task}
                 order={task.priority}
@@ -30,6 +32,13 @@ function ProjectAssignments(props) {
                   dispatch(higherPriority(task.priority));
                 }}
               />
+            )):
+            props.agents.map((agent) => (
+              <Agent
+                key={`${agent.lastName}-${agent.load}`}
+                agent={agent}
+                editMode={props.editMode}
+              />
             ))}
           </Grid>
         </Box>
@@ -41,6 +50,7 @@ const mapStateToProps = state => {
     agents: [...state.agents],
     tasks: [...state.tasks],
     editMode: state.editMode,
+    flipCardToggle: state.flipCardToggle,
   };
 };
 

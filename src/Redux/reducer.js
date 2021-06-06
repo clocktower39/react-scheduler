@@ -1,7 +1,7 @@
-import { ASSIGN_TASK, RESET_ASSIGNMENTS, EDIT_TOGGLE, MODIFY_TASKS, SHUFFLE_THEN_SORT_ARR } from './actions';
-import { agents, tasks, editMode } from './states';
+import { ASSIGN_TASK, RESET_ASSIGNMENTS, EDIT_TOGGLE, FLIP_CARD_TOGGLE, MODIFY_TASKS, SHUFFLE_THEN_SORT_ARR } from './actions';
+import { agents, tasks, editMode, flipCardToggle } from './states';
 
-export let reducer = (state = { agents, tasks, editMode }, action) => {
+export let reducer = (state = { agents, tasks, editMode, flipCardToggle }, action) => {
     let newState = {...state};
 
     switch(action.type){
@@ -9,6 +9,11 @@ export let reducer = (state = { agents, tasks, editMode }, action) => {
             return {
                 ...state,
                 editMode: !state.editMode
+            };
+        case FLIP_CARD_TOGGLE:
+            return {
+                ...state,
+                flipCardToggle: !state.flipCardToggle
             };
         case MODIFY_TASKS:
             return {

@@ -1,13 +1,15 @@
 import React from 'react'
-import Drawer from "./Components/Drawer";
+import Navbar from "./Components/Navbar";
+import ProjectAssignments from "./Components/ProjectAssignments";
 import Footer from "./Components/Footer";
 import "./App.css";
 
 export default function App() {
   return (
     <div className="App">
+      <Navbar />
       <div className="container">
-        <Drawer />
+        <ProjectAssignments />
       </div>
 
       <Footer /> 
