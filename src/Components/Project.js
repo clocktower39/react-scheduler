@@ -31,12 +31,21 @@ const styles = (theme) => ({
     "& input": {
       color: "white",
     },
+    "& label": {
+      color: "white",
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'white',
+    },
   },
   hide: {
     display: "none",
   },
   unassignedAgent: {
     color: "#000000",
+  },
+  taskBottomIcons: {
+    color: 'white',
   },
 });
 
@@ -94,13 +103,13 @@ class Project extends Component {
               this.props.editMode ? classes.iconContainer : classes.hide
             }
           >
-            <Button onClick={this.props.higherPriority}>
+            <Button className={classes.taskBottomIcons} onClick={this.props.higherPriority}>
               <Icon name="arrow-left" />
             </Button>
-            <Button onClick={this.props.removeTask}>
+            <Button className={classes.taskBottomIcons} onClick={this.props.removeTask}>
               <Icon name="trash" />
             </Button>
-            <Button onClick={this.props.lowerPriority}>
+            <Button className={classes.taskBottomIcons} onClick={this.props.lowerPriority}>
               <Icon name="arrow-right" />
             </Button>
           </div>
