@@ -21,14 +21,16 @@ export let reducer = (state = { agents, tasks, editMode, flipCardToggle }, actio
                 tasks: [...action.tasks],
             };
         case ASSIGN_TASK:
-            newState.tasks[action.payload.taskIndex].assignedAgent = newState.agents[action.payload.agentIndex].firstName;
-            newState.agents[action.payload.agentIndex].load += newState.tasks[action.payload.taskIndex].loadScore;
-            // run for loop then dispatch here to set result of loop
-            // each loop iteration will call dispatch
-            return newState;
+            return{
+                ...state,
+                tasks: [...action.tasks],
+                agents: [...action.agents],
+            }
         case RESET_ASSIGNMENTS:
-            newState.agents[action.payload].load = 0;
-            return newState;
+            // newState.agents[action.payload].load = 0;
+            return {
+                ...state,
+            }
         case SHUFFLE_THEN_SORT_ARR:
             return {
                 ...state,

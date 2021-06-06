@@ -50,7 +50,7 @@ function Footer(props) {
               color="secondary"
               onClick={()=>{
                 props.agents.forEach((agent, index) => {
-                  dispatch(resetAssignments(index))
+                  dispatch(resetAssignments())
                 })
 
                 props.tasks.forEach((task,taskIndex) => {

@@ -19,12 +19,23 @@ export function flipCardToggle() {
 }
 
 export function assignTask(agentIndex, taskIndex) {
-    return {
-        type: ASSIGN_TASK,
-        payload: {
-            agentIndex: agentIndex,
-            taskIndex: taskIndex,
-        }
+    return async (dispatch, getState) => {
+        const state = getState();
+        const tasks = state.tasks;
+        const agents = state.agents;
+        console.log(taskIndex)
+        console.log(tasks[taskIndex])
+        
+        tasks[taskIndex].assignedAgent = agents[agentIndex].firstName;
+        agents[agentIndex].load += tasks[taskIndex].loadScore;
+        agents[agentIndex].assignedJobs.push(tasks[taskIndex].task);
+
+        console.log(tasks)
+        return dispatch({
+            type: ASSIGN_TASK,
+            agents: [...agents],
+            tasks: [...tasks],
+        });
     }
 }
 
@@ -35,15 +46,29 @@ export function resetState() {
 }
 
 export function resetAssignments(index) {
-    return {
-        type: RESET_ASSIGNMENTS,
-        payload: index
+    return async (dispatch, getState) => {
+        const state = getState();
+
+        state.agents.map(agent=> {
+            agent.load = 0;
+            agent.assignedJobs = [];
+
+            return agent;
+        });
+
+        state.tasks.map(task => task.assignedAgent='Unassigned')
+
+        return dispatch({
+            type: RESET_ASSIGNMENTS,
+            payload: index
+        });
     }
 }
 
 export function removeTask(priority) {
     return async (dispatch, getState) => {
         const state = getState();
+
         const filtered = state.tasks.filter((task) => task.priority !== priority);
         const tasks = filtered.map((task, index) => {
             task.priority = index + 1

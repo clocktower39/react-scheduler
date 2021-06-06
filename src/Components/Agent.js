@@ -53,13 +53,9 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"body1"}>{this.props.agent.firstName} {this.props.agent.lastName}</Typography>
+              <Typography variant={"h6"}>{this.props.agent.firstName} {this.props.agent.lastName}</Typography>
               <Divider />
-              <Typography
-                variant={"body1"}
-              >
-                {this.props.agent.load}
-              </Typography>
+                {this.props.agent.assignedJobs.length>0?this.props.agent.assignedJobs.map(job => <Typography variant={"body1"}>{job}</Typography>):<Typography variant={"body1"} className={classes.unassignedAgent}>Unassigned</Typography>}
             </>
           ) : (
             <>

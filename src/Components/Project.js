@@ -60,7 +60,7 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"body1"}>{this.props.projectName}</Typography>
+              <Typography variant={"h6"}>{this.props.projectName}</Typography>
               <Divider />
               <Typography
                 variant={"body1"}
