@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import Navbar from "./Components/Navbar";
-import ProjectAssignments from "./Components/ProjectAssignments";
+import TileContainer from "./Components/TileContainer";
 import Footer from "./Components/Footer";
 import "./App.css";
 
@@ -9,10 +9,9 @@ export default function App() {
     <div className="App">
       <Navbar />
       <div className="container">
-        <ProjectAssignments />
+        <TileContainer />
       </div>
-
-      <Footer /> 
+      <Footer />
     </div>
-  )
+  );
 }

@@ -58,7 +58,9 @@ class Project extends Component {
               <Divider />
               {this.props.agent.assignedJobs.length > 0 ? (
                 this.props.agent.assignedJobs.map((job) => (
-                  <Typography key={job} variant={"body1"}>{job}</Typography>
+                  <Typography key={job} variant={"body1"}>
+                    {job}
+                  </Typography>
                 ))
               ) : (
                 <Typography

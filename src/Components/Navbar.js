@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { flipCardToggle } from '../Redux/actions';
+import { useSelector, useDispatch } from "react-redux";
+import { flipCardToggle } from "../Redux/actions";
 import {
   Toolbar,
   Typography,
@@ -21,29 +21,25 @@ const useStyles = makeStyles({
 });
 
 export default function Navbar() {
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const cardToggle = useSelector(state => state.flipCardToggle);
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const cardToggle = useSelector((state) => state.flipCardToggle);
 
-    const handleFabClick = () => dispatch(flipCardToggle());
-    
-    return (
-        <Toolbar className={classes.root}>
-          <Fab
-            onClick={handleFabClick}
-            className={classes.addIcon}
-            size="small"
-          >
-            {cardToggle?<Person />:<Assignment />}
-          </Fab>
-  
-          <Typography variant={"h5"}>Schedule Generator</Typography>
-  
-          <Tooltip title={cardToggle?"Add task":"Add agent"} aria-label="add">
-            <Fab className={classes.addIcon} size="small" color="secondary">
-              <Add />
-            </Fab>
-          </Tooltip>
-        </Toolbar>
-    )
+  const handleFabClick = () => dispatch(flipCardToggle());
+
+  return (
+    <Toolbar className={classes.root}>
+      <Fab onClick={handleFabClick} className={classes.addIcon} size="small">
+        {cardToggle ? <Person /> : <Assignment />}
+      </Fab>
+
+      <Typography variant={"h5"}>Schedule Generator</Typography>
+
+      <Tooltip title={cardToggle ? "Add task" : "Add agent"} aria-label="add">
+        <Fab className={classes.addIcon} size="small" color="secondary">
+          <Add />
+        </Fab>
+      </Tooltip>
+    </Toolbar>
+  );
 }
