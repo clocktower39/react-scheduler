@@ -4,7 +4,7 @@ import { Container, Grid, Box } from "@material-ui/core";
 import Project from "./Project";
 import Agent from "./Agent";
 import { useDispatch } from 'react-redux';
-import { removeTask, lowerPriority, higherPriority } from '../Redux/actions';
+import { removeTask, removeAgent, lowerPriority, higherPriority } from '../Redux/actions';
 
 function ProjectAssignments(props) {
 
@@ -16,7 +16,7 @@ function ProjectAssignments(props) {
             {props.flipCardToggle?
             props.tasks.map((task) => (
               <Project
-                key={task.task}
+                key={`${task.task}-${task.assignedAgent}`}
                 order={task.priority}
                 taskLoadScore={task.loadScore}
                 editMode={props.editMode}
@@ -33,11 +33,14 @@ function ProjectAssignments(props) {
                 }}
               />
             )):
-            props.agents.sort((a,b)=>b.firstName<a.firstName).map((agent) => (
+            props.agents.map((agent, agentIndex) => (
               <Agent
                 key={`${agent.lastName}-${agent.load}`}
                 agent={agent}
                 editMode={props.editMode}
+                removeAgent={() => {
+                  dispatch(removeAgent(agentIndex));
+                }}
               />
             ))}
           </Grid>

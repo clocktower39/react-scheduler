@@ -36,7 +36,6 @@ const styles = (theme) => ({
 });
 
 class Project extends Component {
-
   render() {
     const { classes } = this.props;
     return (
@@ -53,18 +52,31 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"h6"}>{this.props.agent.firstName} {this.props.agent.lastName}</Typography>
+              <Typography variant={"h6"}>
+                {this.props.agent.firstName} {this.props.agent.lastName}
+              </Typography>
               <Divider />
-                {this.props.agent.assignedJobs.length>0?this.props.agent.assignedJobs.map(job => <Typography variant={"body1"}>{job}</Typography>):<Typography variant={"body1"} className={classes.unassignedAgent}>Unassigned</Typography>}
+              {this.props.agent.assignedJobs.length > 0 ? (
+                this.props.agent.assignedJobs.map((job) => (
+                  <Typography key={job} variant={"body1"}>{job}</Typography>
+                ))
+              ) : (
+                <Typography
+                  variant={"body1"}
+                  className={classes.unassignedAgent}
+                >
+                  Unassigned
+                </Typography>
+              )}
             </>
           ) : (
             <>
-            <TextField
-              className={classes.input}
-              label="First Name"
-              defaultValue={this.props.agent.firstName}
-            />
-            <br />
+              <TextField
+                className={classes.input}
+                label="First Name"
+                defaultValue={this.props.agent.firstName}
+              />
+              <br />
               <TextField
                 className={classes.input}
                 label="Last Name"

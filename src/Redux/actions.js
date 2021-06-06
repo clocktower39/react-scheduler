@@ -4,6 +4,7 @@ export const ASSIGN_TASK = 'ASSIGN_TASK';
 export const RESET_STATE = 'RESET_STATE';
 export const RESET_ASSIGNMENTS = 'RESET_ASSIGNMENTS';
 export const MODIFY_TASKS = 'MODIFY_TASKS';
+export const MODIFY_AGENTS = 'MODIFY_AGENTS';
 export const SHUFFLE_THEN_SORT_ARR = 'SHUFFLE_THEN_SORT_ARR';
 
 export function editToggle() {
@@ -23,14 +24,11 @@ export function assignTask(agentIndex, taskIndex) {
         const state = getState();
         const tasks = state.tasks;
         const agents = state.agents;
-        console.log(taskIndex)
-        console.log(tasks[taskIndex])
         
         tasks[taskIndex].assignedAgent = agents[agentIndex].firstName;
         agents[agentIndex].load += tasks[taskIndex].loadScore;
         agents[agentIndex].assignedJobs.push(tasks[taskIndex].task);
 
-        console.log(tasks)
         return dispatch({
             type: ASSIGN_TASK,
             agents: [...agents],
@@ -78,6 +76,19 @@ export function removeTask(priority) {
         return dispatch({
             type: MODIFY_TASKS,
             tasks,
+        });
+    }
+}
+
+export function removeAgent(index) {
+    return async (dispatch, getState) => {
+        const state = getState();
+
+        const agents = state.agents.filter((agent, i) => i !== index);
+
+        return dispatch({
+            type: MODIFY_AGENTS,
+            agents,
         });
     }
 }
