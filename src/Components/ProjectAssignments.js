@@ -33,7 +33,7 @@ function ProjectAssignments(props) {
                 }}
               />
             )):
-            props.agents.map((agent, agentIndex) => (
+            props.agents.sort((a,b)=>b.firstName<a.firstName).map((agent, agentIndex) => (
               <Agent
                 key={`${agent.lastName}-${agent.load}`}
                 agent={agent}

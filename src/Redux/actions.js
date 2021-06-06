@@ -84,7 +84,7 @@ export function removeAgent(index) {
     return async (dispatch, getState) => {
         const state = getState();
 
-        const agents = state.agents.filter((agent, i) => i !== index);
+        const agents = state.agents.sort((a,b)=>b.firstName<a.firstName).filter((agent, i) => i !== index);
 
         return dispatch({
             type: MODIFY_AGENTS,

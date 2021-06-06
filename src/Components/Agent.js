@@ -83,11 +83,6 @@ class Project extends Component {
                 defaultValue={this.props.agent.lastName}
               />
               <br />
-              <TextField
-                label="Load"
-                defaultValue={this.props.agent.load}
-                disabled={true}
-              />
             </>
           )}
           <div
@@ -95,7 +90,7 @@ class Project extends Component {
               this.props.editMode ? classes.iconContainer : classes.hide
             }
           >
-            <Button>
+            <Button onClick={this.props.removeAgent}>
               <Icon name="trash" />
             </Button>
           </div>
