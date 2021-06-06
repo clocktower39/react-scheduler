@@ -27,11 +27,25 @@ const styles = (theme) => ({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  input: {
+    "& input": {
+      color: "white",
+    },
+    "& label": {
+      color: "white",
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'white',
+    },
+  },
   hide: {
     display: "none",
   },
   unassignedAgent: {
     color: "#000000",
+  },
+  trashIcon: {
+    color: 'white',
   },
 });
 
@@ -52,7 +66,7 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"h6"}>
+              <Typography variant={"h5"}>
                 {this.props.agent.firstName} {this.props.agent.lastName}
               </Typography>
               <Divider />
@@ -93,7 +107,7 @@ class Project extends Component {
             }
           >
             <Button onClick={this.props.removeAgent}>
-              <Icon name="trash" />
+              <Icon className={classes.trashIcon} name="trash" />
             </Button>
           </div>
         </Paper>

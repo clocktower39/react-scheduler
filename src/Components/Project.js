@@ -27,6 +27,11 @@ const styles = (theme) => ({
     flexDirection: "row",
     justifyContent: "space-around",
   },
+  input: {
+    "& input": {
+      color: "white",
+    },
+  },
   hide: {
     display: "none",
   },
@@ -60,7 +65,7 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"h6"}>{this.props.projectName}</Typography>
+              <Typography variant={"h5"}>{this.props.projectName}</Typography>
               <Divider />
               <Typography
                 variant={"body1"}
@@ -78,6 +83,7 @@ class Project extends Component {
               />
               <br />
               <TextField
+                className={classes.input}
                 label="Load Score"
                 defaultValue={this.props.taskLoadScore}
               />
