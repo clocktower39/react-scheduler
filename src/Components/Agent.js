@@ -35,7 +35,13 @@ const styles = (theme) => ({
     "& label": {
       color: "white",
     },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
     '& .MuiInput-underline:before': {
+      borderBottomColor: 'white',
+    },
+    '& .MuiInput-underline:after': {
       borderBottomColor: 'white',
     },
   },
@@ -67,7 +73,7 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"h5"}>
+              <Typography variant={"h5"} style={(!this.props.agent.available)?{color: 'red',}:null}>
                 {this.props.agent.firstName} {this.props.agent.lastName}
               </Typography>
               <Divider />
