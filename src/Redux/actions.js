@@ -13,14 +13,14 @@ export function editToggle() {
   };
 }
 
-export function editAvailable(index) {
+export function toggleAvailable(index) {
   return async (dispatch, getState) => {
     const state = getState();
   
     const agents = state.agents
       .sort((a, b) => b.firstName < a.firstName)
       .map((agent, i) => {
-          if(i !== index){
+          if(i === index){
               agent.available = !agent.available;
           }          
           return agent;

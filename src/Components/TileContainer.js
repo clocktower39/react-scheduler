@@ -1,14 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Container, Grid, Box } from "@material-ui/core";
 import Project from "./Project";
 import Agent from "./Agent";
-import { useDispatch } from "react-redux";
 import {
   removeTask,
   removeAgent,
   lowerPriority,
   higherPriority,
+  toggleAvailable,
 } from "../Redux/actions";
 
 function TileContainer(props) {
@@ -46,6 +46,9 @@ function TileContainer(props) {
                     editMode={props.editMode}
                     removeAgent={() => {
                       dispatch(removeAgent(agentIndex));
+                    }}
+                    changeAvailability={()=>{
+                      dispatch(toggleAvailable(agentIndex))
                     }}
                   />
                 ))}

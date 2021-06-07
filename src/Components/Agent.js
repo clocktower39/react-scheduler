@@ -102,6 +102,7 @@ class Project extends Component {
               <br />
               <Typography>Available: 
               <Checkbox
+                onClick={this.props.changeAvailability}
                 checked={this.props.agent.available}
                 defaultValue={this.props.agent.lastName}
               />
