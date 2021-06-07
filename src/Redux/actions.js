@@ -13,6 +13,26 @@ export function editToggle() {
   };
 }
 
+export function editAvailable(index) {
+  return async (dispatch, getState) => {
+    const state = getState();
+  
+    const agents = state.agents
+      .sort((a, b) => b.firstName < a.firstName)
+      .map((agent, i) => {
+          if(i !== index){
+              agent.available = !agent.available;
+          }          
+          return agent;
+        });
+  
+    return dispatch({
+      type: MODIFY_AGENTS,
+      agents,
+    })
+  };
+}
+
 export function flipCardToggle() {
   return {
     type: FLIP_CARD_TOGGLE,
