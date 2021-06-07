@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   Button,
+  Checkbox,
   Divider,
   Paper,
   Grid,
@@ -98,6 +99,13 @@ class Project extends Component {
                 label="Last Name"
                 defaultValue={this.props.agent.lastName}
               />
+              <br />
+              <Typography>Available: 
+              <Checkbox
+                checked={this.props.agent.available}
+                defaultValue={this.props.agent.lastName}
+              />
+              </Typography>
               <br />
             </>
           )}
