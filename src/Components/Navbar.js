@@ -9,6 +9,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { Add, Person, Assignment } from "@material-ui/icons";
+import Modal from './Modal';
 
 const useStyles = makeStyles({
   root: {
@@ -17,7 +18,6 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     backgroundColor: "#37464f",
   },
-  addIcon: {},
 });
 
 export default function Navbar() {
@@ -32,14 +32,8 @@ export default function Navbar() {
       <Fab onClick={handleFabClick} className={classes.addIcon} size="small">
         {cardToggle ? <Person /> : <Assignment />}
       </Fab>
-
       <Typography variant={"h5"}>Schedule Generator</Typography>
-
-      <Tooltip title={cardToggle ? "Add task" : "Add agent"} aria-label="add">
-        <Fab className={classes.addIcon} size="small" color="secondary">
-          <Add />
-        </Fab>
-      </Tooltip>
+<Modal/>
     </Toolbar>
   );
 }
