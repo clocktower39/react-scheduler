@@ -62,7 +62,7 @@ export default function SimpleModal() {
       dispatch(
         addTask({
           task: taskName,
-          loadScore: taskLoad,
+          loadScore: Number(taskLoad),
           associatedProgram: taskAssociatedProgram,
         })
       ).then(()=>{
