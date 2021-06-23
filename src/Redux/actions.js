@@ -99,6 +99,22 @@ export function removeTask(priority) {
     });
   };
 }
+export function addTask(newTask) {
+  return async (dispatch, getState) => {
+    const state = getState();
+
+    const tasks = state.tasks;
+    tasks.push(newTask);
+
+    console.log('tasks');
+    console.log(tasks);
+
+    return dispatch({
+      type: MODIFY_TASKS,
+      tasks,
+    });
+  };
+}
 
 export function removeAgent(index) {
   return async (dispatch, getState) => {
