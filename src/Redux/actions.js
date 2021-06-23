@@ -104,10 +104,11 @@ export function addTask(newTask) {
     const state = getState();
 
     const tasks = state.tasks;
+    newTask.assigned = false;
+    newTask.assignedAgent = "Unassigned";
+    newTask.priority = tasks.length;
     tasks.push(newTask);
-
-    console.log('tasks');
-    console.log(tasks);
+  
 
     return dispatch({
       type: MODIFY_TASKS,

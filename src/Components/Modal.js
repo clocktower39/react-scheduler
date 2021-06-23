@@ -12,13 +12,9 @@ import { Add } from "@material-ui/icons";
 import { addTask } from "../Redux/actions";
 import { useDispatch } from "react-redux";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -62,13 +58,19 @@ export default function SimpleModal() {
   };
 
   const handleAdd = () => {
-    dispatch(
-      addTask({
-        task: taskName,
-        loadScore: taskLoad,
-        associatedProgram: taskAssociatedProgram,
-      })
-    );
+    if(taskName && taskLoad && taskAssociatedProgram){
+      dispatch(
+        addTask({
+          task: taskName,
+          loadScore: taskLoad,
+          associatedProgram: taskAssociatedProgram,
+        })
+      ).then(()=>{
+        setTaskName('');
+        setTaskLoad('');
+        setTaskAssociatedProgram('');
+      });
+    }
   };
 
   const body = (
