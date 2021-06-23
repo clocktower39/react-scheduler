@@ -4,11 +4,10 @@ import { flipCardToggle } from "../Redux/actions";
 import {
   Toolbar,
   Typography,
-  Tooltip,
   Fab,
   makeStyles,
 } from "@material-ui/core";
-import { Add, Person, Assignment } from "@material-ui/icons";
+import { Person, Assignment } from "@material-ui/icons";
 import Modal from './Modal';
 
 const useStyles = makeStyles({

@@ -3,14 +3,12 @@ import Modal from "@material-ui/core/Modal";
 import {
   Button,
   Grid,
-  Toolbar,
-  Typography,
   TextField,
   Tooltip,
   Fab,
   makeStyles,
 } from "@material-ui/core";
-import { Add, Person, Assignment } from "@material-ui/icons";
+import { Add } from "@material-ui/icons";
 import { addTask } from "../Redux/actions";
 import { useDispatch } from "react-redux";
 
