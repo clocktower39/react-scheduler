@@ -116,6 +116,22 @@ export function addTask(newTask) {
     });
   };
 }
+export function addAgent(newAgent) {
+  return async (dispatch, getState) => {
+    const state = getState();
+
+    const agents = state.agents;
+    newAgent.load = 0;
+    newAgent.assignedJobs = [];
+    newAgent.available = true;
+    agents.push(newAgent);
+
+    return dispatch({
+      type: MODIFY_TASKS,
+      agents,
+    });
+  };
+}
 
 export function removeAgent(index) {
   return async (dispatch, getState) => {
