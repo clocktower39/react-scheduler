@@ -4,32 +4,28 @@ import {
   Grid,
   TextField,
 } from "@material-ui/core";
-import { addTask } from "../../Redux/actions";
+import { addAgent } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
 
 
 export default function AddTask() {
     const dispatch = useDispatch();
-    const [taskName, setTaskName] = useState("");
-    const [taskLoad, setTaskLoad] = useState("");
-    const [taskAssociatedProgram, setTaskAssociatedProgram] = useState("");
+    const [agentFirstName, setAgentFirstName] = useState("");
+    const [agentLastName, setAgentLastName] = useState("");
+    const [programs, setPrograms] = useState([]);
 
     const handleChange = (e, setter) => {
         setter(e.target.value);
       };
     
       const handleAdd = () => {
-        if(taskName && taskLoad && taskAssociatedProgram){
+        if(agentFirstName && agentLastName && programs){
           dispatch(
-            addTask({
-              task: taskName,
-              loadScore: Number(taskLoad),
-              associatedProgram: taskAssociatedProgram,
+            addAgent({
+                // add new agent object here
             })
           ).then(()=>{
-            setTaskName('');
-            setTaskLoad('');
-            setTaskAssociatedProgram('');
+              //reset state values
           });
         }
       };
@@ -41,8 +37,8 @@ export default function AddTask() {
             fullWidth
             variant="outlined"
             label="First Name"
-            value={taskName}
-            onChange={(e) => handleChange(e, setTaskName)}
+            value={agentFirstName}
+            onChange={(e) => handleChange(e, setAgentFirstName)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -50,8 +46,8 @@ export default function AddTask() {
             fullWidth
             variant="outlined"
             label="Last Name"
-            value={taskLoad}
-            onChange={(e) => handleChange(e, setTaskLoad)}
+            value={agentLastName}
+            onChange={(e) => handleChange(e, setAgentLastName)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -59,8 +55,8 @@ export default function AddTask() {
             fullWidth
             variant="outlined"
             label="Programs"
-            value={taskAssociatedProgram}
-            onChange={(e) => handleChange(e, setTaskAssociatedProgram)}
+            value={programs}
+            onChange={(e) => handleChange(e, setPrograms)}
           />
         </Grid>
         <Grid container item xs={12} justify="center">

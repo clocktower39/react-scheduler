@@ -127,7 +127,7 @@ export function addAgent(newAgent) {
     agents.push(newAgent);
 
     return dispatch({
-      type: MODIFY_TASKS,
+      type: MODIFY_AGENTS,
       agents,
     });
   };
