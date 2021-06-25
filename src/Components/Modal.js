@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import Modal from "@material-ui/core/Modal";
 import {
-  Button,
   Grid,
-  TextField,
   Tooltip,
   Fab,
   makeStyles,
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import { addTask } from "../Redux/actions";
-import { useDispatch } from "react-redux";
+import AddTask from './Tasks/AddTask';
 
 function getModalStyle() {
   const top = 50;
@@ -37,13 +34,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SimpleModal() {
   const classes = useStyles();
-  const dispatch = useDispatch();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [taskName, setTaskName] = useState("");
-  const [taskLoad, setTaskLoad] = useState("");
-  const [taskAssociatedProgram, setTaskAssociatedProgram] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -53,60 +46,9 @@ export default function SimpleModal() {
     setOpen(false);
   };
 
-  const handleChange = (e, setter) => {
-    setter(e.target.value);
-  };
-
-  const handleAdd = () => {
-    if(taskName && taskLoad && taskAssociatedProgram){
-      dispatch(
-        addTask({
-          task: taskName,
-          loadScore: Number(taskLoad),
-          associatedProgram: taskAssociatedProgram,
-        })
-      ).then(()=>{
-        setTaskName('');
-        setTaskLoad('');
-        setTaskAssociatedProgram('');
-      });
-    }
-  };
-
   const body = (
     <Grid container spacing={2} style={modalStyle} className={classes.paper}>
-      <Grid item xs={12}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          label="Task"
-          value={taskName}
-          onChange={(e) => handleChange(e, setTaskName)}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          label="Load"
-          value={taskLoad}
-          onChange={(e) => handleChange(e, setTaskLoad)}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          label="Associated Program"
-          value={taskAssociatedProgram}
-          onChange={(e) => handleChange(e, setTaskAssociatedProgram)}
-        />
-      </Grid>
-      <Grid container item xs={12} justify="center">
-        <Button onClick={handleAdd} variant="outlined">
-          Add
-        </Button>
-      </Grid>
+      <AddTask />
     </Grid>
   );
 

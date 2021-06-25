@@ -1,8 +1,8 @@
 import React from "react";
 import { connect, useDispatch } from "react-redux";
 import { Container, Grid, Box } from "@material-ui/core";
-import Project from "./Project";
-import Agent from "./Agent";
+import Project from "./Tasks/Project";
+import Agent from "./Agent/Agent";
 import {
   removeTask,
   removeAgent,
