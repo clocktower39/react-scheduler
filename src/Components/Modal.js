@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import AddTask from './Tasks/AddTask';
+import AddAgent from './Agent/AddAgent';
 
 function getModalStyle() {
   const top = 50;
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SimpleModal() {
+export default function SimpleModal(props) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
@@ -48,7 +49,7 @@ export default function SimpleModal() {
 
   const body = (
     <Grid container spacing={2} style={modalStyle} className={classes.paper}>
-      <AddTask />
+      {props.cardToggle?<AddTask />:<AddAgent />}
     </Grid>
   );
 

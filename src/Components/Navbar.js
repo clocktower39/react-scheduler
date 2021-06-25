@@ -32,7 +32,7 @@ export default function Navbar() {
         {cardToggle ? <Person /> : <Assignment />}
       </Fab>
       <Typography variant={"h5"}>Schedule Generator</Typography>
-      <Modal/>
+      <Modal cardToggle={cardToggle} />
     </Toolbar>
   );
 }
