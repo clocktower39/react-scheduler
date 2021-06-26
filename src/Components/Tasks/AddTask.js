@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   TextField,
+  Typography
 } from "@material-ui/core";
 import { addTask } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
@@ -36,6 +37,9 @@ export default function AddTask() {
     
     return (
         <>
+        <Grid item xs={12} container justify="center" >
+            <Typography variant="h5">Add a new task</Typography>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             fullWidth

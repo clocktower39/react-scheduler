@@ -3,6 +3,7 @@ import {
   Button,
   Grid,
   TextField,
+  Typography
 } from "@material-ui/core";
 import { addAgent } from "../../Redux/actions";
 import { useDispatch } from "react-redux";
@@ -22,16 +23,21 @@ export default function AddTask() {
         if(agentFirstName && agentLastName && programs){
           dispatch(
             addAgent({
-                // add new agent object here
+                firstName: agentFirstName,
+                lastName: agentLastName
             })
           ).then(()=>{
-              //reset state values
+            setAgentFirstName('');
+            setAgentLastName('');
           });
         }
       };
     
     return (
         <>
+        <Grid item xs={12} container justify="center" >
+            <Typography variant="h5">Add a new agent</Typography>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             fullWidth
