@@ -27,8 +27,8 @@ export default function Navbar() {
   const handleFabClick = () => dispatch(flipCardToggle());
 
   return (
-    <Toolbar className={classes.root} title={cardToggle?"Toggle to Agents":"Toggle to Tasks"}>
-      <Fab onClick={handleFabClick} className={classes.addIcon} size="small">
+    <Toolbar className={classes.root} >
+      <Fab title={cardToggle?"Toggle to Agents":"Toggle to Tasks"} onClick={handleFabClick} className={classes.addIcon} size="small">
         {cardToggle ? <Person /> : <Assignment />}
       </Fab>
       <Typography variant={"h5"}>Schedule Generator</Typography>

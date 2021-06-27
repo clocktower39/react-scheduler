@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {
   Button,
+  IconButton,
   Checkbox,
   Divider,
   Paper,
@@ -9,6 +10,7 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
+import { RemoveCircle, AddCircle } from "@material-ui/icons";
 import Icon from "awesome-react-icons";
 
 const styles = (theme) => ({
@@ -35,14 +37,14 @@ const styles = (theme) => ({
     "& label": {
       color: "white",
     },
-    '& label.Mui-focused': {
-      color: 'white',
+    "& label.Mui-focused": {
+      color: "white",
     },
-    '& .MuiInput-underline:before': {
-      borderBottomColor: 'white',
+    "& .MuiInput-underline:before": {
+      borderBottomColor: "white",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'white',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "white",
     },
   },
   hide: {
@@ -52,7 +54,7 @@ const styles = (theme) => ({
     color: "#000000",
   },
   trashIcon: {
-    color: 'white',
+    color: "white",
   },
 });
 
@@ -73,7 +75,10 @@ class Project extends Component {
         <Paper className={classes.paper}>
           {!this.props.editMode ? (
             <>
-              <Typography variant={"h5"} style={(!this.props.agent.available)?{color: 'red',}:null}>
+              <Typography
+                variant={"h5"}
+                style={!this.props.agent.available ? { color: "red" } : null}
+              >
                 {this.props.agent.firstName} {this.props.agent.lastName}
               </Typography>
               <Divider />
@@ -93,28 +98,47 @@ class Project extends Component {
               )}
             </>
           ) : (
-            <>
-              <TextField
-                className={classes.input}
-                label="First Name"
-                defaultValue={this.props.agent.firstName}
-              />
-              <br />
-              <TextField
-                className={classes.input}
-                label="Last Name"
-                defaultValue={this.props.agent.lastName}
-              />
-              <br />
-              <Typography>Available: 
-              <Checkbox
-                onClick={this.props.changeAvailability}
-                checked={this.props.agent.available}
-                defaultValue={this.props.agent.lastName}
-              />
-              </Typography>
-              <br />
-            </>
+            <Grid container>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.input}
+                  label="First Name"
+                  defaultValue={this.props.agent.firstName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.input}
+                  label="Last Name"
+                  defaultValue={this.props.agent.lastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>
+                  Available:
+                  <Checkbox
+                    onClick={this.props.changeAvailability}
+                    checked={this.props.agent.available}
+                    defaultValue={this.props.agent.lastName}
+                  />
+                </Typography>
+              </Grid>
+              <Grid container item xs={12}>
+                {this.props.agent.programs.map((program) => (
+                  <Grid container alignItems="center">
+                    <Grid item xs={8}>
+                      <Typography variant="body1">{program}</Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <IconButton>
+                        <RemoveCircle />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                ))}
+                <Grid item xs={12}><IconButton><AddCircle /></IconButton></Grid>
+              </Grid>
+            </Grid>
           )}
           <div
             className={
