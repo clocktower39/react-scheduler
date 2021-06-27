@@ -16,7 +16,14 @@ export default function AddTask() {
     const [taskAssociatedProgram, setTaskAssociatedProgram] = useState("");
 
     const handleChange = (e, setter) => {
-        setter(e.target.value);
+        if(setter === setTaskLoad){
+            console.log('isNan passed')
+            if(!isNaN(e.target.value)){
+                setter(e.target.value);
+            }
+        }else{
+            setter(e.target.value);
+        }
       };
     
       const handleAdd = () => {
@@ -54,6 +61,7 @@ export default function AddTask() {
             fullWidth
             variant="outlined"
             label="Load"
+            type="number"
             value={taskLoad}
             onChange={(e) => handleChange(e, setTaskLoad)}
           />

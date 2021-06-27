@@ -55,7 +55,7 @@ export default function SimpleModal(props) {
 
   return (
     <div>
-      <Tooltip>
+      <Tooltip title={props.cardToggle?"Add New Task":"Add New Agent"}>
         <Fab
           className={classes.addIcon}
           size="small"

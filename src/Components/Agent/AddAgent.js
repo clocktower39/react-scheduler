@@ -24,11 +24,13 @@ export default function AddTask() {
           dispatch(
             addAgent({
                 firstName: agentFirstName,
-                lastName: agentLastName
+                lastName: agentLastName,
+                programs
             })
           ).then(()=>{
             setAgentFirstName('');
             setAgentLastName('');
+            setPrograms([]);
           });
         }
       };
@@ -54,15 +56,6 @@ export default function AddTask() {
             label="Last Name"
             value={agentLastName}
             onChange={(e) => handleChange(e, setAgentLastName)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            label="Programs"
-            value={programs}
-            onChange={(e) => handleChange(e, setPrograms)}
           />
         </Grid>
         <Grid container item xs={12} justify="center">
