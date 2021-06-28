@@ -148,6 +148,20 @@ export function removeAgent(index) {
   };
 }
 
+
+export function removeProgramFromAgent(programToRemove, agent) {
+  return async (dispatch, getState) => {
+    const state = getState();
+
+    const agents = state.agents[agent].programs.filter((program) => program !== programToRemove);
+
+    return dispatch({
+      type: MODIFY_AGENTS,
+      agents,
+    });
+  };
+}
+
 export function lowerPriority(priority) {
   return async (dispatch, getState) => {
     const state = getState();

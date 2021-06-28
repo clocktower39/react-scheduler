@@ -43,6 +43,7 @@ function TileContainer(props) {
                   <Agent
                     key={`${agent.lastName}-${agent.load}`}
                     agent={agent}
+                    index={agentIndex}
                     editMode={props.editMode}
                     removeAgent={() => {
                       dispatch(removeAgent(agentIndex));
