@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   IconButton,
@@ -12,13 +12,15 @@ import {
 } from "@material-ui/core";
 import { RemoveCircle, AddCircle } from "@material-ui/icons";
 import Icon from "awesome-react-icons";
+import { useDispatch } from "react-redux";
+import { addProgramToAgent, removeProgramFromAgent } from "../../Redux/actions";
 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
   paper: {
-    padding: '7.5px',
+    padding: "7.5px",
     textAlign: "center",
     backgroundColor: "#3f51b5",
     alignItems: "stretch",
@@ -60,6 +62,12 @@ const useStyles = makeStyles({
 
 export default function Agent(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [newProgram, setNewProgram] = useState('');
+
+  const handleChange = (e) => {
+    setNewProgram(e.target.value);
+  }
 
   return (
     <Grid
@@ -89,10 +97,7 @@ export default function Agent(props) {
                 </Typography>
               ))
             ) : (
-              <Typography
-                variant={"body1"}
-                className={classes.unassignedAgent}
-              >
+              <Typography variant={"body1"} className={classes.unassignedAgent}>
                 Unassigned
               </Typography>
             )}
@@ -130,26 +135,38 @@ export default function Agent(props) {
                     <Typography variant="body1">{program}</Typography>
                   </Grid>
                   <Grid item xs={4}>
-                    <IconButton onClick={props.removeProgram}>
+                    <IconButton
+                      onClick={() =>
+                        dispatch(removeProgramFromAgent(program, props.agent))
+                      }
+                    >
                       <RemoveCircle />
                     </IconButton>
                   </Grid>
                 </Grid>
               ))}
-              <Grid item xs={12}><IconButton><AddCircle /></IconButton></Grid>
+              <Grid container item xs={12} justify="center">
+                <Grid item xs={8}>
+                  <TextField variant="outlined" label="Program" value={newProgram} onChange={handleChange}/>
+                </Grid>
+                <Grid item xs={4}>
+                  <IconButton
+                      onClick={() =>
+                        dispatch(addProgramToAgent(newProgram, props.agent))
+                      }>
+                    <AddCircle />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         )}
-        <div
-          className={
-            props.editMode ? classes.iconContainer : classes.hide
-          }
-        >
+        <div className={props.editMode ? classes.iconContainer : classes.hide}>
           <Button onClick={props.removeAgent}>
             <Icon className={classes.trashIcon} name="trash" />
           </Button>
         </div>
       </Paper>
     </Grid>
-  )
+  );
 }

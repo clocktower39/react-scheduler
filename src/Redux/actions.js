@@ -161,6 +161,23 @@ export function removeProgramFromAgent(programToRemove, agent) {
     });
   };
 }
+export function addProgramToAgent(programToAdd, addToAgent) {
+  return async (dispatch, getState) => {
+    const state = getState();
+
+    const agents = state.agents.map(agent => {
+        if(agent === addToAgent){
+          agent.programs.push(programToAdd);
+        }
+        return agent;
+      })
+
+    return dispatch({
+      type: MODIFY_AGENTS,
+      agents,
+    });
+  };
+}
 
 export function lowerPriority(priority) {
   return async (dispatch, getState) => {
