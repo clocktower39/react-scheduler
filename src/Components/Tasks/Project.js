@@ -96,6 +96,12 @@ class Project extends Component {
                 label="Load Score"
                 defaultValue={this.props.taskLoadScore}
               />
+              <br />
+              <TextField
+                className={classes.input}
+                label="Associated Program"
+                defaultValue={this.props.task.associatedProgram}
+              />
             </>
           )}
           <div

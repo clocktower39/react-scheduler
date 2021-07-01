@@ -26,6 +26,7 @@ function TileContainer(props) {
                   editMode={props.editMode}
                   projectName={task.task}
                   agent={task.assignedAgent}
+                  task={task}
                   removeTask={() => {
                     dispatch(removeTask(task.priority));
                   }}
