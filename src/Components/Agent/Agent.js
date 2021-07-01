@@ -31,6 +31,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
+    marginTop: '25px',
   },
   input: {
     "& input": {
@@ -63,11 +64,11 @@ const useStyles = makeStyles({
 export default function Agent(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [newProgram, setNewProgram] = useState('');
+  const [newProgram, setNewProgram] = useState("");
 
   const handleChange = (e) => {
     setNewProgram(e.target.value);
-  }
+  };
 
   return (
     <Grid
@@ -131,8 +132,11 @@ export default function Agent(props) {
             <Grid container item xs={12}>
               {props.agent.programs.map((program) => (
                 <Grid container alignItems="center" key={program}>
-                  <Grid item xs={8}>
-                    <Typography variant="body1">{program}</Typography>
+                  <Grid item xs={2} />
+                  <Grid item xs={6}>
+                    <Typography variant="body1" align="left">
+                      {program}
+                    </Typography>
                   </Grid>
                   <Grid item xs={4}>
                     <IconButton
@@ -146,14 +150,23 @@ export default function Agent(props) {
                 </Grid>
               ))}
               <Grid container item xs={12} justify="center">
-                <Grid item xs={8}>
-                  <TextField variant="outlined" label="Program" value={newProgram} onChange={handleChange}/>
+                <Grid item xs={2} />
+                <Grid item xs={6}>
+                  <TextField
+                    label="Program"
+                    value={newProgram}
+                    onChange={handleChange}
+                    className={classes.input}
+                  />
                 </Grid>
                 <Grid item xs={4}>
                   <IconButton
-                      onClick={() =>
-                        dispatch(addProgramToAgent(newProgram, props.agent)).then(()=>setNewProgram(''))
-                      }>
+                    onClick={() =>
+                      dispatch(addProgramToAgent(newProgram, props.agent)).then(
+                        () => setNewProgram("")
+                      )
+                    }
+                  >
                     <AddCircle />
                   </IconButton>
                 </Grid>
