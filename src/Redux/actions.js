@@ -149,16 +149,22 @@ export function removeAgent(index) {
 }
 
 
-export function removeProgramFromAgent(programToRemove, agent) {
+export function removeProgramFromAgent(programToRemove, removeFromAgent) {
   return async (dispatch, getState) => {
     const state = getState();
 
-    const agents = state.agents[agent].programs.filter((program) => program !== programToRemove);
 
-    return dispatch({
-      type: MODIFY_AGENTS,
-      agents,
-    });
+    const agents = state.agents.map(agent => {
+      if(agent === removeFromAgent){
+        agent.programs = agent.programs.filter( p => p !== programToRemove);
+      }
+      return agent;
+    })
+
+  return dispatch({
+    type: MODIFY_AGENTS,
+    agents,
+  });
   };
 }
 export function addProgramToAgent(programToAdd, addToAgent) {

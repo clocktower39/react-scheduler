@@ -130,7 +130,7 @@ export default function Agent(props) {
             </Grid>
             <Grid container item xs={12}>
               {props.agent.programs.map((program) => (
-                <Grid container alignItems="center">
+                <Grid container alignItems="center" key={program}>
                   <Grid item xs={8}>
                     <Typography variant="body1">{program}</Typography>
                   </Grid>
@@ -152,7 +152,7 @@ export default function Agent(props) {
                 <Grid item xs={4}>
                   <IconButton
                       onClick={() =>
-                        dispatch(addProgramToAgent(newProgram, props.agent))
+                        dispatch(addProgramToAgent(newProgram, props.agent)).then(()=>setNewProgram(''))
                       }>
                     <AddCircle />
                   </IconButton>
