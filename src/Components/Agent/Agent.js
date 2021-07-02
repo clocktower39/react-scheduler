@@ -62,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Agent(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [firstName, setFirstName] = useState(props.agent.firstName);
+  const [lastName, setLastName] = useState(props.agent.lastName);
   const [newProgram, setNewProgram] = useState("");
 
   const handleChange = (e) => {
@@ -108,14 +110,16 @@ export default function Agent(props) {
               <TextField
                 className={classes.input}
                 label="First Name"
-                defaultValue={props.agent.firstName}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} >
               <TextField
                 className={classes.input}
                 label="Last Name"
-                defaultValue={props.agent.lastName}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} >
