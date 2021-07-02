@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Button,
   Divider,
@@ -6,123 +6,114 @@ import {
   Grid,
   TextField,
   Typography,
-  withStyles,
+  makeStyles,
 } from "@material-ui/core";
 import Icon from "awesome-react-icons";
 
-const styles = (theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    backgroundColor: "#3f51b5",
-    alignItems: "stretch",
-    width: "100%",
-    color: "white",
-  },
-  iconContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  input: {
-    "& input": {
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: "center",
+      backgroundColor: "#3f51b5",
+      alignItems: "stretch",
+      width: "100%",
       color: "white",
     },
-    "& label": {
-      color: "white",
+    iconContainer: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-around",
     },
-    '& .MuiInput-underline:before': {
-      borderBottomColor: 'white',
+    input: {
+      "& input": {
+        color: "white",
+      },
+      "& label": {
+        color: "white",
+      },
+      '& .MuiInput-underline:before': {
+        borderBottomColor: 'white',
+      },
     },
-  },
-  hide: {
-    display: "none",
-  },
-  unassignedAgent: {
-    color: "#000000",
-  },
-  taskBottomIcons: {
-    color: 'white',
-  },
-});
+    hide: {
+      display: "none",
+    },
+    unassignedAgent: {
+      color: "#000000",
+    },
+    taskBottomIcons: {
+      color: 'white',
+    },
+}))
 
-class Project extends Component {
-  constructor(props) {
-    super(props);
+export default function Project(props) {
+    const classes = useStyles();
 
-    this.isAgentAssigned = this.isAgentAssigned.bind(this);
-  }
-  isAgentAssigned = (classes) =>
-    this.props.agent === "Unassigned" ? classes.unassignedAgent : null;
-
-  render() {
-    const { classes } = this.props;
+    const isAgentAssigned = (classes) => props.agent === "Unassigned" ? classes.unassignedAgent : null;
+    
     return (
-      <Grid
-        style={{ order: this.props.order }}
-        className={classes.root}
-        container
-        item
-        xs={12}
-        sm={6}
-        md={4}
-        lg={4}
-      >
-        <Paper className={classes.paper}>
-          {!this.props.editMode ? (
-            <>
-              <Typography variant={"h5"}>{this.props.projectName}</Typography>
-              <Divider />
-              <Typography
-                variant={"body1"}
-                className={this.isAgentAssigned(classes)}
-              >
-                {this.props.agent}
-              </Typography>
-            </>
-          ) : (
-            <>
-              <TextField
-                className={classes.input}
-                label="Task Name"
-                defaultValue={this.props.projectName}
-              />
-              <br />
-              <TextField
-                className={classes.input}
-                label="Load Score"
-                defaultValue={this.props.taskLoadScore}
-              />
-              <br />
-              <TextField
-                className={classes.input}
-                label="Associated Program"
-                defaultValue={this.props.task.associatedProgram}
-              />
-            </>
-          )}
-          <div
-            className={
-              this.props.editMode ? classes.iconContainer : classes.hide
-            }
-          >
-            <Button className={classes.taskBottomIcons} onClick={this.props.higherPriority}>
-              <Icon name="arrow-left" />
-            </Button>
-            <Button className={classes.taskBottomIcons} onClick={this.props.removeTask}>
-              <Icon name="trash" />
-            </Button>
-            <Button className={classes.taskBottomIcons} onClick={this.props.lowerPriority}>
-              <Icon name="arrow-right" />
-            </Button>
-          </div>
-        </Paper>
-      </Grid>
-    );
-  }
+        <Grid
+          style={{ order: props.order }}
+          className={classes.root}
+          container
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={4}
+        >
+          <Paper className={classes.paper}>
+            {!props.editMode ? (
+              <>
+                <Typography variant={"h5"}>{props.projectName}</Typography>
+                <Divider />
+                <Typography
+                  variant={"body1"}
+                  className={isAgentAssigned(classes)}
+                >
+                  {props.agent}
+                </Typography>
+              </>
+            ) : (
+              <>
+                <TextField
+                  className={classes.input}
+                  label="Task Name"
+                  defaultValue={props.projectName}
+                />
+                <br />
+                <TextField
+                  className={classes.input}
+                  label="Load Score"
+                  defaultValue={props.taskLoadScore}
+                />
+                <br />
+                <TextField
+                  className={classes.input}
+                  label="Associated Program"
+                  defaultValue={props.task.associatedProgram}
+                />
+              </>
+            )}
+            <div
+              className={
+                props.editMode ? classes.iconContainer : classes.hide
+              }
+            >
+              <Button className={classes.taskBottomIcons} onClick={props.higherPriority}>
+                <Icon name="arrow-left" />
+              </Button>
+              <Button className={classes.taskBottomIcons} onClick={props.removeTask}>
+                <Icon name="trash" />
+              </Button>
+              <Button className={classes.taskBottomIcons} onClick={props.lowerPriority}>
+                <Icon name="arrow-right" />
+              </Button>
+            </div>
+          </Paper>
+        </Grid>
+    )
 }
-
-export default withStyles(styles)(Project);
