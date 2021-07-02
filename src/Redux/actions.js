@@ -256,3 +256,57 @@ export function shuffleThenSortArr(agents) {
     });
   };
 }
+export function changeProjectName(task, newProjectName){
+  return async (dispatch, getState) => {
+    const state = getState();
+    const tasks = state.tasks;
+
+    tasks.map(t => {
+      if(t === task){
+        t.task = newProjectName;
+      }
+      return t;
+    })
+
+    return dispatch({
+      type: MODIFY_TASKS,
+      tasks
+    });
+  };
+}
+export function changeTaskLoadScore(task, newTaskLoadScore){
+  return async (dispatch, getState) => {
+    const state = getState();
+    const tasks = state.tasks;
+
+    tasks.map(t => {
+      if(t === task && !isNaN(newTaskLoadScore)){
+        t.loadScore = newTaskLoadScore;
+      }
+      return t;
+    })
+
+    return dispatch({
+      type: MODIFY_TASKS,
+      tasks
+    });
+  };
+}
+export function changeAssociatedProgram(task, newAssociatedProgram){
+  return async (dispatch, getState) => {
+    const state = getState();
+    const tasks = state.tasks;
+
+    tasks.map(t => {
+      if(t === task){
+        t.associatedProgram = newAssociatedProgram;
+      }
+      return t;
+    })
+
+    return dispatch({
+      type: MODIFY_TASKS,
+      tasks
+    });
+  };
+}

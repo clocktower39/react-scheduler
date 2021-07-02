@@ -82,19 +82,22 @@ export default function Project(props) {
                 <TextField
                   className={classes.input}
                   label="Task Name"
-                  defaultValue={props.projectName}
+                  value={props.projectName}
+                  onChange={(e)=>props.onProjectNameChange(e.target.value)}
                 />
                 <br />
                 <TextField
                   className={classes.input}
                   label="Load Score"
-                  defaultValue={props.taskLoadScore}
+                  value={props.taskLoadScore}
+                  onChange={(e)=>props.onTaskLoadScoreChange(e.target.value)}
                 />
                 <br />
                 <TextField
                   className={classes.input}
                   label="Associated Program"
-                  defaultValue={props.task.associatedProgram}
+                  value={props.task.associatedProgram}
+                  onChange={(e)=>props.onAssociatedProgramChange(e.target.value)}
                 />
               </>
             )}

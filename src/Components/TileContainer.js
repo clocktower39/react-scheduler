@@ -9,6 +9,9 @@ import {
   lowerPriority,
   higherPriority,
   toggleAvailable,
+  changeProjectName,
+  changeTaskLoadScore,
+  changeAssociatedProgram,
 } from "../Redux/actions";
 
 function TileContainer(props) {
@@ -35,6 +38,15 @@ function TileContainer(props) {
                   }}
                   higherPriority={() => {
                     dispatch(higherPriority(task.priority));
+                  }}
+                  onProjectNameChange={(newProjectName) => {
+                    dispatch(changeProjectName(task, newProjectName));
+                  }}
+                  onTaskLoadScoreChange={(newTaskLoadScore) => {
+                    dispatch(changeTaskLoadScore(task, newTaskLoadScore));
+                  }}
+                  onAssociatedProgramChange={(newAssociatedProgram) => {
+                    dispatch(changeAssociatedProgram(task, newAssociatedProgram));
                   }}
                 />
               ))
