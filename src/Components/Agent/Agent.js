@@ -15,23 +15,15 @@ import Icon from "awesome-react-icons";
 import { useDispatch } from "react-redux";
 import { addProgramToAgent, removeProgramFromAgent } from "../../Redux/actions";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
   },
   paper: {
-    padding: "7.5px",
+    padding: "15px 0",
     textAlign: "center",
     backgroundColor: "#3f51b5",
-    alignItems: "stretch",
     width: "100%",
     color: "white",
-  },
-  iconContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: '25px',
   },
   input: {
     "& input": {
@@ -57,9 +49,15 @@ const useStyles = makeStyles({
     color: "#000000",
   },
   trashIcon: {
-    color: "white",
+    color: theme.palette.grey[900]
   },
-});
+  RemoveCircle: {
+    color: theme.palette.grey[900]
+  },
+  AddCircle: {
+    color: theme.palette.secondary.main
+  }
+}));
 
 export default function Agent(props) {
   const classes = useStyles();
@@ -104,7 +102,8 @@ export default function Agent(props) {
             )}
           </>
         ) : (
-          <Grid container>
+          <Grid container spacing={3} direction="column">
+
             <Grid item xs={12}>
               <TextField
                 className={classes.input}
@@ -112,14 +111,14 @@ export default function Agent(props) {
                 defaultValue={props.agent.firstName}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} >
               <TextField
                 className={classes.input}
                 label="Last Name"
                 defaultValue={props.agent.lastName}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} >
               <Typography>
                 Available:
                 <Checkbox
@@ -129,7 +128,7 @@ export default function Agent(props) {
                 />
               </Typography>
             </Grid>
-            <Grid container item xs={12}>
+            <Grid container item xs={12} >
               {props.agent.programs.map((program) => (
                 <Grid container alignItems="center" key={program}>
                   <Grid item xs={2} />
@@ -144,7 +143,7 @@ export default function Agent(props) {
                         dispatch(removeProgramFromAgent(program, props.agent))
                       }
                     >
-                      <RemoveCircle />
+                      <RemoveCircle className={classes.RemoveCircle}/>
                     </IconButton>
                   </Grid>
                 </Grid>
@@ -153,10 +152,11 @@ export default function Agent(props) {
                 <Grid item xs={2} />
                 <Grid item xs={6}>
                   <TextField
-                    label="Program"
+                    label="Add a Program"
                     value={newProgram}
                     onChange={handleChange}
                     className={classes.input}
+                    fullWidth
                   />
                 </Grid>
                 <Grid item xs={4}>
@@ -167,18 +167,18 @@ export default function Agent(props) {
                       )
                     }
                   >
-                    <AddCircle />
+                    <AddCircle className={classes.AddCircle} />
                   </IconButton>
                 </Grid>
               </Grid>
             </Grid>
+            <Grid container item xs={12} justify="center">
+              <Button onClick={props.removeAgent} >
+                <Icon className={classes.trashIcon} name="trash" />
+              </Button>
+            </Grid>
           </Grid>
         )}
-        <div className={props.editMode ? classes.iconContainer : classes.hide}>
-          <Button onClick={props.removeAgent}>
-            <Icon className={classes.trashIcon} name="trash" />
-          </Button>
-        </div>
       </Paper>
     </Grid>
   );
